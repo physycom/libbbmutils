@@ -17,6 +17,10 @@ VEC3D set_vec3d(double x, double y, double z){
 	return v;
 }
 
+void setmod_vec3d(VEC3D * v) {
+  v->mod = sqrt(v->x*v->x + v->y*v->y + v->z*v->z);
+}
+
 void normalize_vec3d(VEC3D * v){
 	v->x /= v->mod;
 	v->y /= v->mod;
@@ -31,7 +35,14 @@ double prod_dot(VEC3D a, VEC3D b){
 VEC3D prod_cross(VEC3D a, VEC3D b){
 	return set_vec3d( a.y * b.z - a.z * b.y ,
 					  a.z * b.x - a.x * b.z ,
-					  a.x * b.y - a.y * b.z );
+					  a.x * b.y - a.y * b.x );
+}
+
+void multiply_vec3d(double alpha, VEC3D * v) {
+  v->x *= alpha;
+  v->y *= alpha;
+  v->z *= alpha;
+  v->mod *= alpha;
 }
 
 
@@ -62,7 +73,7 @@ MAT3D transpose_mat3d(MAT3D A){
 	C.zy = A.yz;
 	C.zz = A.zz;
 	return C;
-};
+}
 
 MAT3D product_mat3d(MAT3D A, MAT3D B){
 	MAT3D C;
@@ -76,7 +87,19 @@ MAT3D product_mat3d(MAT3D A, MAT3D B){
   C.zy = A.zx * B.xy + A.zy * B.yy + A.zz * B.zy;
   C.zz = A.zx * B.xz + A.zy * B.yz + A.zz * B.zz;
 	return C;
-};
+}
+
+void multiply_mat3d(double alpha, MAT3D * m) {
+  m->xx *= alpha;
+  m->xy *= alpha;
+  m->xz *= alpha;
+  m->yx *= alpha;
+  m->yy *= alpha;
+  m->yz *= alpha;
+  m->zx *= alpha;
+  m->zy *= alpha;
+  m->zz *= alpha;
+}
 
 MAT3D make_rotation_cs(VEC3D axis, double c, double s){
 	if ( axis.mod < EPSILON) { printf("Null vector as axis of rotation\n"); exit(5); }
@@ -193,13 +216,6 @@ double check_eigs(EigenSys es){
 	return check;	
 }
 
-void print_eigs(EigenSys es){
-	printf("Eigensystem for matrix\n\t| %6.2f  %6.2f |\n\t| %6.2f  %6.2f |\n",es.a[0][0],es.a[0][1],es.a[1][0],es.a[1][1]);
-	printf("\nl1 = %6.2f\nv1 = ( %6.2f  %6.2f )\nu1 = ( %6.2f  %6.2f )\n",es.l1,es.v1[0],es.v1[1],es.u1[0],es.u1[1]);
-	printf("\nl2 = %6.2f\nv2 = ( %6.2f  %6.2f )\nu2 = ( %6.2f  %6.2f )\n",es.l2,es.v2[0],es.v2[1],es.u2[0],es.u2[1]);
-	printf("\ncheck = %f\n",check_eigs(es));
-}
-
 
 // display function
 void print_vec3d(VEC3D v, const char * name){
@@ -208,5 +224,12 @@ void print_vec3d(VEC3D v, const char * name){
 
 void print_mat3d(MAT3D m, const char * name){
 	printf("%s = \n| %6.3f %6.3f %6.3f |\n| %6.3f %6.3f %6.3f |\n| %6.3f %6.3f %6.3f |\n", name, m.xx, m.xy, m.xz, m.yx, m.yy, m.yz, m.zx, m.zy, m.zz);
+}
+
+void print_eigs(EigenSys es){
+	printf("Eigensystem for matrix\n\t| %6.2f  %6.2f |\n\t| %6.2f  %6.2f |\n",es.a[0][0],es.a[0][1],es.a[1][0],es.a[1][1]);
+	printf("\nl1 = %6.2f\nv1 = ( %6.2f  %6.2f )\nu1 = ( %6.2f  %6.2f )\n",es.l1,es.v1[0],es.v1[1],es.u1[0],es.u1[1]);
+	printf("\nl2 = %6.2f\nv2 = ( %6.2f  %6.2f )\nu2 = ( %6.2f  %6.2f )\n",es.l2,es.v2[0],es.v2[1],es.u2[0],es.u2[1]);
+	printf("\ncheck = %f\n",check_eigs(es));
 }
 

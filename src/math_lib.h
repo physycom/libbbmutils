@@ -9,11 +9,15 @@ typedef struct VEC3D {
 
 VEC3D set_vec3d(double, double, double );
 
+void setmod_vec3d(VEC3D *);
+
+void normalize_vec3d(VEC3D *);
+
 double prod_dot(VEC3D, VEC3D);
 
 VEC3D prod_cross(VEC3D, VEC3D);
 
-void normalize_vec3d(VEC3D *);
+void multiply_vec3d(double, VEC3D *);
 
 
 // matrix algebra
@@ -26,6 +30,8 @@ MAT3D set_mat3d(double, double, double, double, double, double, double, double, 
 MAT3D transpose_mat3d(MAT3D);
 
 MAT3D product_mat3d(MAT3D, MAT3D);
+
+void multiply_mat3d(double, MAT3D *);
 
 MAT3D make_rotation_cs(VEC3D, double, double);
 
@@ -49,10 +55,10 @@ EigenSys eigs_2x2_sym(double[2][2]);
 
 double check_eigs(EigenSys);
 
-void print_eigs(EigenSys);
-
 
 // display function
 void print_vec3d(VEC3D, const char *);
 
 void print_mat3d(MAT3D, const char *);
+
+void print_eigs(EigenSys);
