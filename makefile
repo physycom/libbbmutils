@@ -1,6 +1,6 @@
-all: matrix_lib.o rotations.c
-	gcc -o rotations.exe matrix_lib.o rotations.c
-	./rotations.exe
+test: obj/matrix_lib.o src/test.c
+	gcc -o bin/rotations.exe obj/matrix_lib.o src/test.c
+	./bin/rotations.exe
 
-matrix_lib.o: matrix_lib.h matrix_lib.c
-	gcc -c -o matrix_lib.o matrix_lib.c
+obj/matrix_lib.o: src/matrix_lib.h src/matrix_lib.c
+	gcc -c -o obj/matrix_lib.o src/matrix_lib.c
