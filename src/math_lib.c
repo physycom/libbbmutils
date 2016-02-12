@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "matrix_lib.h"
+#include "math_lib.h"
 
 #define EPSILON        1e-8
 

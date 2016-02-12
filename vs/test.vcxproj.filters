@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\matrix_lib.c">
+    <ClCompile Include="..\src\test.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\test.c">
+    <ClCompile Include="..\src\math_lib.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\matrix_lib.h">
+    <ClInclude Include="..\src\math_lib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

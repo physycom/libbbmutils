@@ -2,7 +2,7 @@
 #define _USE_MATH_DEFINES
 #endif
 
-#include "matrix_lib.h"
+#include "math_lib.h"
 
 int main(){
 	VEC3D v1, v2, axis;
