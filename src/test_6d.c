@@ -8,7 +8,6 @@ int main(){
   VEC6D v;
   MAT6D m;
   MAT3D rot1, rot2;
-	double angle;
 
 	printf("---- TEST 6D MATH_LIB ----\n");
 
