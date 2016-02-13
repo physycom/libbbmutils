@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-// vector algebra
+// 3d vector algebra
 typedef struct VEC3D { 
 	double x, y, z, mod; 
 } VEC3D;
@@ -20,7 +20,7 @@ VEC3D prod_cross(VEC3D, VEC3D);
 void multiply_vec3d(double, VEC3D *);
 
 
-// matrix algebra
+// 3d matrix algebra
 typedef struct MAT3D { 
 	double xx, xy, xz, yx, yy, yz, zx, zy, zz; 
 } MAT3D;
@@ -42,6 +42,26 @@ VEC3D rotate_vec3d(VEC3D, MAT3D);
 MAT3D rotate_mat3d(MAT3D, MAT3D);
 
 
+// 6d vector
+typedef struct VEC6D {
+  VEC3D a, g;
+} VEC6D;
+
+VEC6D set_vec6d(double , double , double , double , double, double);
+
+VEC6D rotate_vec6d(VEC6D, MAT3D);
+
+
+// 6d matrix
+typedef struct MAT6D {
+  MAT3D A[2][2];
+} MAT6D;
+
+MAT6D set_mat6d(MAT3D, MAT3D, MAT3D, MAT3D);
+
+MAT6D rotate_mat6d(MAT6D, MAT3D);
+
+
 // 2d eigenvalue problem
 typedef struct EigenSys{
 	double a[2][2];
@@ -61,4 +81,8 @@ void print_vec3d(VEC3D, const char *);
 
 void print_mat3d(MAT3D, const char *);
 
-void print_eigs(EigenSys);
+void print_vec6d(VEC6D, const char *);
+
+void print_mat6d(MAT6D, const char *);
+
+void print_eigs(EigenSys, const char *);
