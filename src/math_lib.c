@@ -7,8 +7,7 @@
 #define RAD_TO_DEG    57.2957795131             // 180/pi
 #define M_PI          3.14159265358979323846    /* pi */
 
-#define EPSILON        1e-8
-
+#define EPSILON       1e-8
 
 // 2d vector algebra
 VEC2D set_vec2d(double x, double y) {
@@ -115,10 +114,10 @@ MAT2D product_mat2d(MAT2D A, MAT2D B) {
 }
 
 void multiply_mat2d(double alpha, MAT2D * A) {
-  A->xx = alpha * A->xy;
-  A->xx = alpha * A->xy;
-  A->yx = alpha * A->yy;
-  A->yx = alpha * A->yy;
+  A->xx *= alpha;
+  A->xy *= alpha;
+  A->yx *= alpha;
+  A->yy *= alpha;
 }
 
 MAT2D make_rotation_2d_cs(double c, double s) {
@@ -237,15 +236,7 @@ VEC3D rotate_vec3d(MAT3D rot, VEC3D v) {
 
 MAT3D rotate_mat3d(MAT3D rot, MAT3D m) {
   MAT3D mr;
-  mr.xx = m.xx * rot.xx * rot.xx + m.xy * rot.xx * rot.xy + m.yx * rot.xx * rot.xy + m.yy * rot.xy * rot.xy + m.xz * rot.xx * rot.xz + m.zx * rot.xx * rot.xz + m.yz * rot.xy * rot.xz + m.zy * rot.xy * rot.xz + m.zz * rot.xz * rot.xz;
-  mr.xy = m.xx * rot.xx * rot.yx + m.yx * rot.xy * rot.yx + m.zx * rot.xz * rot.yx + m.xy * rot.xx * rot.yy + m.yy * rot.xy * rot.yy + m.zy * rot.xz * rot.yy + m.xz * rot.xx * rot.yz + m.yz * rot.xy * rot.yz + m.zz * rot.xz * rot.yz;
-  mr.xz = m.xx * rot.xx * rot.zx + m.yx * rot.xy * rot.zx + m.zx * rot.xz * rot.zx + m.xy * rot.xx * rot.zy + m.yy * rot.xy * rot.zy + m.zy * rot.xz * rot.zy + m.xz * rot.xx * rot.zz + m.yz * rot.xy * rot.zz + m.zz * rot.xz * rot.zz;
-  mr.yx = m.xx * rot.xx * rot.yx + m.xy * rot.xy * rot.yx + m.xz * rot.xz * rot.yx + m.yx * rot.xx * rot.yy + m.yy * rot.xy * rot.yy + m.yz * rot.xz * rot.yy + m.zx * rot.xx * rot.yz + m.zy * rot.xy * rot.yz + m.zz * rot.xz * rot.yz;
-  mr.yy = m.xx * rot.yx * rot.yx + m.xy * rot.yx * rot.yy + m.yx * rot.yx * rot.yy + m.yy * rot.yy * rot.yy + m.xz * rot.yx * rot.yz + m.zx * rot.yx * rot.yz + m.yz * rot.yy * rot.yz + m.zy * rot.yy * rot.yz + m.zz * rot.yz * rot.yz;
-  mr.yz = m.xx * rot.yx * rot.zx + m.yx * rot.yy * rot.zx + m.zx * rot.yz * rot.zx + m.xy * rot.yx * rot.zy + m.yy * rot.yy * rot.zy + m.zy * rot.yz * rot.zy + m.xz * rot.yx * rot.zz + m.yz * rot.yy * rot.zz + m.zz * rot.yz * rot.zz;
-  mr.zx = m.xx * rot.xx * rot.zx + m.xy * rot.xy * rot.zx + m.xz * rot.xz * rot.zx + m.yx * rot.xx * rot.zy + m.yy * rot.xy * rot.zy + m.yz * rot.xz * rot.zy + m.zx * rot.xx * rot.zz + m.zy * rot.xy * rot.zz + m.zz * rot.xz * rot.zz;
-  mr.zy = m.xx * rot.yx * rot.zx + m.xy * rot.yy * rot.zx + m.xz * rot.yz * rot.zx + m.yx * rot.yx * rot.zy + m.yy * rot.yy * rot.zy + m.yz * rot.yz * rot.zy + m.zx * rot.yx * rot.zz + m.zy * rot.yy * rot.zz + m.zz * rot.yz * rot.zz;
-  mr.zz = m.xx * rot.zx * rot.zx + m.xy * rot.zx * rot.zy + m.yx * rot.zx * rot.zy + m.yy * rot.zy * rot.zy + m.xz * rot.zx * rot.zz + m.zx * rot.zx * rot.zz + m.yz * rot.zy * rot.zz + m.zy * rot.zy * rot.zz + m.zz * rot.zz * rot.zz;
+  mr = product_mat3d(rot, product_mat3d(m, transpose_mat3d(rot)));
   return mr;
 }
 

@@ -29,7 +29,7 @@ int main() {
   print_vec3d(rotate_vec3d(rot, v), "v_rotated");
   print_mat3d(m, "\nm");
   print_mat3d(rotate_mat3d(rot, m), "m_rotated");
-  print_mat3d(product_mat3d(rot, product_mat3d(m, transpose_mat3d(rot))), "m_rotated (test product)");
+  print_mat3d(product_mat3d(product_mat3d(rot, m), transpose_mat3d(rot)), "m_rotated (test product)");
 
 
   return 0;
