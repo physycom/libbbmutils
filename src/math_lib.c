@@ -42,7 +42,7 @@ double prod_cross_2d(VEC2D a, VEC2D b) {
 void multiply_vec2d(double alpha, VEC2D * v) {
   v->x *= alpha;
   v->y *= alpha;
-  v->mod *= alpha;
+  v->mod *= fabs(alpha);
 }
 
 
@@ -82,7 +82,7 @@ void multiply_vec3d(double alpha, VEC3D * v) {
   v->x *= alpha;
   v->y *= alpha;
   v->z *= alpha;
-  v->mod *= alpha;
+  v->mod *= fabs(alpha);
 }
 
 
