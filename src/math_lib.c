@@ -227,7 +227,7 @@ MAT3D make_rotation(VEC3D axis, double angle) {
   return rot;
 }
 
-VEC3D rotate_vec3d(VEC3D v, MAT3D rot) {
+VEC3D rotate_vec3d(MAT3D rot, VEC3D v) {
   VEC3D vr;
   vr.x = rot.xx * v.x + rot.xy * v.y + rot.xz * v.z;
   vr.y = rot.yx * v.x + rot.yy * v.y + rot.yz * v.z;
@@ -235,7 +235,7 @@ VEC3D rotate_vec3d(VEC3D v, MAT3D rot) {
   return vr;
 }
 
-MAT3D rotate_mat3d(MAT3D m, MAT3D rot) {
+MAT3D rotate_mat3d(MAT3D rot, MAT3D m) {
   MAT3D mr;
   mr.xx = m.xx * rot.xx * rot.xx + m.xy * rot.xx * rot.xy + m.yx * rot.xx * rot.xy + m.yy * rot.xy * rot.xy + m.xz * rot.xx * rot.xz + m.zx * rot.xx * rot.xz + m.yz * rot.xy * rot.xz + m.zy * rot.xy * rot.xz + m.zz * rot.xz * rot.xz;
   mr.xy = m.xx * rot.xx * rot.yx + m.yx * rot.xy * rot.yx + m.zx * rot.xz * rot.yx + m.xy * rot.xx * rot.yy + m.yy * rot.xy * rot.yy + m.zy * rot.xz * rot.yy + m.xz * rot.xx * rot.yz + m.yz * rot.xy * rot.yz + m.zz * rot.xz * rot.yz;
@@ -258,10 +258,10 @@ VEC6D set_vec6d(double ax, double ay, double az, double gx, double gy, double gz
   return v;
 }
 
-VEC6D rotate_vec6d(VEC6D v, MAT3D rot) {
+VEC6D rotate_vec6d(MAT3D rot, VEC6D v) {
   VEC6D vr;
-  vr.a = rotate_vec3d(v.a, rot);
-  vr.g = rotate_vec3d(v.g, rot);
+  vr.a = rotate_vec3d(rot, v.a);
+  vr.g = rotate_vec3d(rot, v.g);
   return vr;
 }
 
@@ -276,12 +276,12 @@ MAT6D set_mat6d(MAT3D A00, MAT3D A01, MAT3D A10, MAT3D A11) {
   return m;
 }
 
-MAT6D rotate_mat6d(MAT6D m, MAT3D rot) {
+MAT6D rotate_mat6d(MAT3D rot, MAT6D m) {
   MAT6D mr;
-  mr.A[0][0] = rotate_mat3d(m.A[0][0], rot);
-  mr.A[0][1] = rotate_mat3d(m.A[0][1], rot);
-  mr.A[1][0] = rotate_mat3d(m.A[1][0], rot);
-  mr.A[1][1] = rotate_mat3d(m.A[1][1], rot);
+  mr.A[0][0] = rotate_mat3d(rot, m.A[0][0]);
+  mr.A[0][1] = rotate_mat3d(rot, m.A[0][1]);
+  mr.A[1][0] = rotate_mat3d(rot, m.A[1][0]);
+  mr.A[1][1] = rotate_mat3d(rot, m.A[1][1]);
   return mr;
 }
 
@@ -381,6 +381,7 @@ void print_mat6d(MAT6D m, const char * name) {
 }
 
 void print_eigs(EigenSys es, const char * description) {
+  printf("%s\n", description);
   print_mat2d(es.A, "A ");
   printf("\nl1 = %6.3f\n", es.l1);
   print_vec2d(es.v1, "v1 ");

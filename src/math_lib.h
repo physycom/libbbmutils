@@ -81,7 +81,7 @@ extern "C" {
 
   MAT3D make_rotation(VEC3D, double);
 
-  VEC3D rotate_vec3d(VEC3D, MAT3D);
+  VEC3D rotate_vec3d(MAT3D, VEC3D);
 
   MAT3D rotate_mat3d(MAT3D, MAT3D);
 
@@ -93,7 +93,7 @@ extern "C" {
 
   VEC6D set_vec6d(double, double, double, double, double, double);
 
-  VEC6D rotate_vec6d(VEC6D, MAT3D);
+  VEC6D rotate_vec6d(MAT3D, VEC6D);
 
 
   // 6d matrix
@@ -103,7 +103,7 @@ extern "C" {
 
   MAT6D set_mat6d(MAT3D, MAT3D, MAT3D, MAT3D);
 
-  MAT6D rotate_mat6d(MAT6D, MAT3D);
+  MAT6D rotate_mat6d(MAT3D, MAT6D);
 
 
   // 2d eigenvalue problem

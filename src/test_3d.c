@@ -26,9 +26,9 @@ int main() {
   print_mat3d(rot, "rot");
   print_mat3d(transpose_mat3d(rot), "rot (test transpose)");
   print_vec3d(v, "\nv");
-  print_vec3d(rotate_vec3d(v, rot), "v_rotated");
+  print_vec3d(rotate_vec3d(rot, v), "v_rotated");
   print_mat3d(m, "\nm");
-  print_mat3d(rotate_mat3d(m, rot), "m_rotated");
+  print_mat3d(rotate_mat3d(rot, m), "m_rotated");
   print_mat3d(product_mat3d(rot, product_mat3d(m, transpose_mat3d(rot))), "m_rotated (test product)");
 
 

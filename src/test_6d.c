@@ -23,9 +23,9 @@ int main(){
   rot2 = make_rotation(set_vec3d(0.0, 1.0, 0.0), M_PI/2.0);
 
   print_vec6d(v, "v");
-  print_vec6d(rotate_vec6d(v, rot1), "v_rotated");
+  print_vec6d(rotate_vec6d(rot1, v), "v_rotated");
   print_mat6d(m, "\nm");
-  print_mat6d(rotate_mat6d(m, rot2), "m_rotated");
+  print_mat6d(rotate_mat6d(rot2, m), "m_rotated");
 
   
   return 0;
