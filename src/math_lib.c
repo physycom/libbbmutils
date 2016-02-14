@@ -341,7 +341,7 @@ int check_eigs(EigenSys es) {
   if (fabs(lhs.x - rhs.x) < EPSILON) check += 1;
   if (fabs(lhs.y - rhs.y) < EPSILON) check += 10;
   lhs = rotate_vec2d(es.A, es.u2);
-  rhs = es.u1; multiply_vec2d(es.l2, &rhs);
+  rhs = es.u2; multiply_vec2d(es.l2, &rhs);
   if (fabs(lhs.x - rhs.x) < EPSILON) check += 100;
   if (fabs(lhs.y - rhs.y) < EPSILON) check += 1000;
   return check;
@@ -389,5 +389,5 @@ void print_eigs(EigenSys es, const char * description) {
   printf("\nl2 = %6.3f\n", es.l2);
   print_vec2d(es.v2, "v2 ");
   print_vec2d(es.u2, "u2 ");
-  printf("\ncheck = %4.0d\n", check_eigs(es));
+  printf("\ncheck (1111 is ok) = %04d\n", check_eigs(es));
 }
