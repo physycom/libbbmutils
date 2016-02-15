@@ -67,6 +67,12 @@ void normalize_vec3d(VEC3D * v) {
   v->mod = 1.0;
 }
 
+VEC3D _normalize_vec3d(VEC3D v) {
+  VEC3D n;
+  n = set_vec3d(v.x / v.mod, v.y / v.mod, v.z / v.mod);
+  return n;
+}
+
 double prod_dot(VEC3D a, VEC3D b) {
   return a.x * b.x + a.y * b.y + a.z * b.z;
 }

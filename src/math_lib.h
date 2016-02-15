@@ -35,6 +35,8 @@ extern "C" {
 
   void normalize_vec3d(VEC3D *);
 
+  VEC3D _normalize_vec3d(VEC3D v);
+
   double prod_dot(VEC3D, VEC3D);
 
   VEC3D prod_cross(VEC3D, VEC3D);
