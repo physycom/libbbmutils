@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>     // memset
 #include <math.h>
 
 #include "math_lib.h"

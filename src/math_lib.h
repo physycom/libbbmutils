@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
 #define ENABLE_DISPLAY_FUNCTIONS
 
 #ifdef __cplusplus
@@ -39,7 +35,7 @@ extern "C" {
 
   void multiply_mat2d(double, MAT2D *);
 
-  inline void make_rotation_2d_cs(MAT2D * rot, const double c, const double s);
+  void make_rotation_2d_cs(MAT2D * rot, const double c, const double s);
 
   void make_rotation_2d(MAT2D * rot, const double angle);
 
@@ -79,7 +75,7 @@ extern "C" {
 
   void multiply_mat3d(MAT3D * m, const double alpha);
 
-  inline void make_rotation_cs(MAT3D * rot, const VEC3D * v, const double c, const double s);
+  void make_rotation_cs(MAT3D * rot, const VEC3D * v, const double c, const double s);
 
   void make_rotation(MAT3D * rot, const VEC3D * v, const double angle);
 

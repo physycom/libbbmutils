@@ -220,10 +220,8 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 #Exclude input/output
-input*/
-output*/
 *.opendb
+*.db
 *.txt
-*.mxp
-/rdp/conf.json
 *.json
+test/

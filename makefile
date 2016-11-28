@@ -1,25 +1,41 @@
+BIN_FOLDER  = bin
+SRC_FOLDER  = src
+OBJ_FOLDER  = obj
+TEST_FOLDER = test
+
+TEST_SCRIPT = ./$(SRC_FOLDER)/test_all.sh
+
+TEST        = test_2d test_3d test_6d test_es
+TEST_EXE    = $(addprefix $(BIN_FOLDER)/,$(addsuffix .exe, $(basename $(TEST))))
+
+OBJ         = math_lib
+OBJ_LIB     = $(addprefix $(OBJ_FOLDER)/,$(addsuffix .o, $(basename $(OBJ))))
+
 test: all
-	./bin/test_2d.exe > bin/test_2d.log
-	./bin/test_3d.exe > bin/test_3d.log
-	./bin/test_6d.exe > bin/test_6d.log
-	./bin/test_es.exe > bin/test_es.log
+	@./$(BIN_FOLDER)/test_2d.exe > $(TEST_FOLDER)/test_2d.log
+	@./$(BIN_FOLDER)/test_3d.exe > $(TEST_FOLDER)/test_3d.log
+	@./$(BIN_FOLDER)/test_6d.exe > $(TEST_FOLDER)/test_6d.log
+	@./$(BIN_FOLDER)/test_es.exe > $(TEST_FOLDER)/test_es.log
+	@echo "Running tests..."
+	@$(TEST_SCRIPT)
 
-all: test_2d test_3d test_6d test_es
+all: dirs
+all: $(OBJ_LIB)
+all: $(TEST_EXE)
 
-test_2d: obj/math_lib.o src/test_2d.c
-	gcc -o bin/test_2d.exe obj/math_lib.o src/test_2d.c
+dirs:
+	@[ -d $(BIN_FOLDER) ] || mkdir -p $(BIN_FOLDER)
+	@[ -d $(OBJ_FOLDER) ] || mkdir -p $(OBJ_FOLDER)
+	@[ -d $(TEST_FOLDER) ] || mkdir -p $(TEST_FOLDER)
 
-test_3d: obj/math_lib.o src/test_3d.c
-	gcc -o bin/test_3d.exe obj/math_lib.o src/test_3d.c
+$(BIN_FOLDER)/%.exe: $(BIN_FOLDER)/%.o
+	gcc -o $@ $(OBJ_LIB) $<
 
-test_6d: obj/math_lib.o src/test_6d.c
-	gcc -o bin/test_6d.exe obj/math_lib.o src/test_6d.c
+$(BIN_FOLDER)/%.o: $(SRC_FOLDER)/%.c
+	gcc -c -o $@ $<
 
-test_es: obj/math_lib.o src/test_es.c
-	gcc -o bin/test_es.exe obj/math_lib.o src/test_es.c
+$(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.c $(SRC_FOLDER)/%.h
+	gcc -c -o $@ $<
 
-obj/math_lib.o: src/math_lib.h src/math_lib.c
-	gcc -c -o obj/math_lib.o src/math_lib.c
-
-clean: 
-	rm -rf bin/*.exe bin/*.log obj/math_lib.o
+clean:
+	rm -rf bin/*.exe obj/math_lib.o
