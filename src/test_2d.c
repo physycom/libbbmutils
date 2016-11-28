@@ -5,32 +5,42 @@
 #include "math_lib.h"
 
 int main() {
-  VEC2D v;
-  MAT2D rot, m;
-  double angle;
-
   printf("---- TEST 2D MATH_LIB ----\n");
+  double angle;
+  VEC2D v, vr, u, ur;
+  MAT2D m, mt, m2, rot, mr;
 
-  v = set_vec2d(1.0, 1.0);
-
-  m = set_mat2d(0.0, 5.0,
+  set_vec2d(&v, 1.0,  1.0);
+  print_vec2d(&v, "\n2d vector = v");
+  
+  set_mat2d(&m, 0.0,  4.0,
                 5.0, -2.0);
+  print_mat2d(&m, "\n2d matrix = A");
+  
+  rotate_vec2d(&u, &m, &v);
+  print_vec2d(&u, "\n2d vector (test product) = u = Av");
 
+  transpose_mat2d(&mt, &m);
+  print_mat2d(&mt, "\n2d matrix (test transpose) = At");
+
+  product_mat2d(&m2, &m, &m);
+  print_mat2d(&m2, "\n2d matrix (test product) = A A");
+  
   angle = M_PI / 4;
-  rot = make_rotation_2d(angle);
+  make_rotation_2d(&rot, angle);
+  printf("\nangle = %5.2f\n", angle*180.0 / M_PI);
+  print_mat2d(&rot, "\n2d matrix (rotation) = R");
 
-  printf("angle = %5.2f\n", angle*180.0 / M_PI);
-  print_mat2d(rot, "rotation = R");
-  print_mat2d(transpose_mat2d(rot), "rotation (test transpose) = Rt");
-  print_vec2d(v, "\n2d vector = v");
-  print_vec2d(rotate_vec2d(rot, v), "2d vector (rotated) = Rv");
-  print_mat2d(m, "\n2d matrix = A");
-  print_mat2d(rotate_mat2d(rot, m), "2d matrix (rotated, test function) = f(A)");
-  print_mat2d(product_mat2d(rot, product_mat2d(m, transpose_mat2d(rot))), "2d matrix (rotated, test product) = RARt");
-  print_vec2d(rotate_vec2d(m, v), "\n2d vector = w = Av");
-  print_vec2d(rotate_vec2d(rot, rotate_vec2d(m, v)), "\n2d vector (rotated) = Rw");
-  print_vec2d(rotate_vec2d( rotate_mat2d(rot, m), rotate_vec2d(rot, v) ), "\n w (rotated, test associativity) = (RvRt) (Rv)");
+  rotate_vec2d(&vr, &rot, &v);
+  print_vec2d(&vr, "\n2d vector (test rotation) = Rv");
 
+  rotate_mat2d(&mr, &rot, &m);
+  print_mat2d(&mr, "\n2d matrix (test rotation) = B = R A Rt");
+  
+  rotate_vec2d(&ur, &rot, &u);
+  print_vec2d(&ur, "\n2d vector = Ru");
+  rotate_vec2d(&ur, &mr, &vr);
+  print_vec2d(&ur, "\n2d vector = Bu");
 
   return 0;
 }

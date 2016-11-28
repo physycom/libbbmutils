@@ -5,28 +5,32 @@
 #include "math_lib.h"
 
 int main(){
-  VEC6D v;
-  MAT6D m;
-  MAT3D rot1, rot2;
+  VEC6D v, vr;
+  VEC3D axis;
+  MAT3D m00, m01, m10, m11, rot;
+  MAT6D m, mr;
 
 	printf("---- TEST 6D MATH_LIB ----\n");
 
-  v = set_vec6d(1.0,1.0,0.0,  1.0,0.0,1.0);
+  set_vec6d(&v, 1.0,1.0,0.0,  1.0,0.0,1.0);
+  print_vec6d(&v, "\n6d vector = v");
 
-  rot1 = make_rotation(set_vec3d(0.0, 1.0, 0.0), M_PI);
+  set_mat3d(&m00,  1.0, 0.0, 0.0, 0.0,  2.0, 0.0, 0.0, 0.0,  3.0);
+  set_mat3d(&m01,  4.0, 0.0, 0.0, 0.0,  5.0, 0.0, 0.0, 0.0,  6.0);
+  set_mat3d(&m10,  7.0, 0.0, 0.0, 0.0,  8.0, 0.0, 0.0, 0.0,  9.0);
+  set_mat3d(&m11, 10.0, 0.0, 0.0, 0.0, 11.0, 0.0, 0.0, 0.0, 12.0);
+  set_mat6d(&m, &m00, &m01, &m10, &m11);
+  print_mat6d(&m, "\n6d matrix = A");
 
-  m = set_mat6d( set_mat3d(  1.0, 0.0, 0.0, 0.0,  2.0, 0.0, 0.0, 0.0,  3.0 ) ,
-                 set_mat3d(  4.0, 0.0, 0.0, 0.0,  5.0, 0.0, 0.0, 0.0,  6.0 ),
-                 set_mat3d(  7.0, 0.0, 0.0, 0.0,  8.0, 0.0, 0.0, 0.0,  9.0 ),
-                 set_mat3d( 10.0, 0.0, 0.0, 0.0, 11.0, 0.0, 0.0, 0.0, 12.0 ));
+  set_vec3d(&axis, 0.0, 1.0, 0.0);
+  make_rotation(&rot, &axis, M_PI/2);
+  print_mat3d(&rot, "\n3d matrix (rotation) = R");
 
-  rot2 = make_rotation(set_vec3d(0.0, 1.0, 0.0), M_PI/2.0);
+  rotate_vec6d(&vr, &rot, &v);
+  print_vec6d(&vr, "\n6d vector (test rotation) = Rv");
 
-  print_vec6d(v, "v");
-  print_vec6d(rotate_vec6d(rot1, v), "v_rotated");
-  print_mat6d(m, "\nm");
-  print_mat6d(rotate_mat6d(rot2, m), "m_rotated");
-
+  rotate_mat6d(&mr, &rot, &m);
+  print_mat6d(&mr, "\n6d matrix (test rotation) = R A Rt");
   
   return 0;
 }

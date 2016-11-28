@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 
+#define ENABLE_DISPLAY_FUNCTIONS
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -11,37 +13,17 @@ extern "C" {
     double x, y, mod;
   } VEC2D;
 
-  VEC2D set_vec2d(double, double);
+  void set_vec2d(VEC2D * v, const double x, const double y);
 
-  void setmod_vec2d(VEC2D *);
+  void setmod_vec2d(VEC2D * v);
 
-  void normalize_vec2d(VEC2D *);
+  void normalize_vec2d(VEC2D * v);
 
-  double prod_dot_2d(VEC2D, VEC2D);
+  double prod_dot_2d(const VEC2D * v, const VEC2D * u);
 
-  double prod_cross_2d(VEC2D, VEC2D);            // returns z-component on a right-handed frame
+  double prod_cross_2d(const VEC2D * v, const VEC2D * u);            // returns z-component on a right-handed frame
 
-  void multiply_vec2d(double, VEC2D *);
-
-
-  // 3d vector algebra
-  typedef struct VEC3D {
-    double x, y, z, mod;
-  } VEC3D;
-
-  VEC3D set_vec3d(double, double, double);
-
-  void setmod_vec3d(VEC3D *);
-
-  void normalize_vec3d(VEC3D *);
-
-  VEC3D _normalize_vec3d(VEC3D v);
-
-  double prod_dot(VEC3D, VEC3D);
-
-  VEC3D prod_cross(VEC3D, VEC3D);
-
-  void multiply_vec3d(double, VEC3D *);
+  void multiply_vec2d(VEC2D * v, const double alpha);
 
 
   // 2d matrix algebra
@@ -49,21 +31,39 @@ extern "C" {
     double xx, xy, yx, yy;
   } MAT2D;
 
-  MAT2D set_mat2d(double, double, double, double);
+  void set_mat2d(MAT2D * m, double xx, double xy, double yx, double yy);
+  
+  void transpose_mat2d(MAT2D * mt, const MAT2D * m);
 
-  MAT2D transpose_mat2d(MAT2D);
-
-  MAT2D product_mat2d(MAT2D, MAT2D);
+  void product_mat2d(MAT2D * result, const MAT2D * a, const MAT2D * b);
 
   void multiply_mat2d(double, MAT2D *);
 
-  MAT2D make_rotation_2d_cs(double, double);
+  inline void make_rotation_2d_cs(MAT2D * rot, const double c, const double s);
 
-  MAT2D make_rotation_2d(double);
+  void make_rotation_2d(MAT2D * rot, const double angle);
 
-  VEC2D rotate_vec2d(MAT2D, VEC2D);
+  void rotate_vec2d(VEC2D * result, const MAT2D * rot, const VEC2D * v);
 
-  MAT2D rotate_mat2d(MAT2D, MAT2D);
+  void rotate_mat2d(MAT2D * result, const MAT2D * rot, const MAT2D * m);
+
+
+  // 3d vector algebra
+  typedef struct VEC3D {
+    double x, y, z, mod;
+  } VEC3D;
+
+  void set_vec3d(VEC3D * v, const double x, const double y, const double z);
+
+  void setmod_vec3d(VEC3D * v);
+
+  void normalize_vec3d(VEC3D * v);
+
+  double prod_dot_3d(const VEC3D * a, const VEC3D * b);
+
+  void prod_cross_3d(VEC3D * result, const VEC3D * a, const VEC3D * b);
+
+  void multiply_vec3d(VEC3D * v, const double alpha);
 
 
   // 3d matrix algebra
@@ -71,21 +71,21 @@ extern "C" {
     double xx, xy, xz, yx, yy, yz, zx, zy, zz;
   } MAT3D;
 
-  MAT3D set_mat3d(double, double, double, double, double, double, double, double, double);
+  void set_mat3d(MAT3D * m, const double xx, const double xy, const double xz, const double yx, const double yy, const double yz, const double zx, const double zy, const double zz);
 
-  MAT3D transpose_mat3d(MAT3D);
+  void transpose_mat3d(MAT3D * result, const MAT3D * m);
 
-  MAT3D product_mat3d(MAT3D, MAT3D);
+  void product_mat3d(MAT3D * result, const MAT3D * a, const MAT3D * b);
 
-  void multiply_mat3d(double, MAT3D *);
+  void multiply_mat3d(MAT3D * m, const double alpha);
 
-  MAT3D make_rotation_cs(VEC3D, double, double);
+  inline void make_rotation_cs(MAT3D * rot, const VEC3D * v, const double c, const double s);
 
-  MAT3D make_rotation(VEC3D, double);
+  void make_rotation(MAT3D * rot, const VEC3D * v, const double angle);
 
-  VEC3D rotate_vec3d(MAT3D, VEC3D);
+  void rotate_vec3d(VEC3D * result, const MAT3D * rot, const VEC3D * v);
 
-  MAT3D rotate_mat3d(MAT3D, MAT3D);
+  void rotate_mat3d(MAT3D * result, const MAT3D * rot, const MAT3D * m);
 
 
   // 6d vector
@@ -93,9 +93,9 @@ extern "C" {
     VEC3D a, g;
   } VEC6D;
 
-  VEC6D set_vec6d(double, double, double, double, double, double);
+  void set_vec6d(VEC6D * v, const double ax, const double ay, const double az, const double gx, const double gy, const double gz);
 
-  VEC6D rotate_vec6d(MAT3D, VEC6D);
+  void rotate_vec6d(VEC6D * result, const MAT3D * rot, const VEC6D * v);
 
 
   // 6d matrix
@@ -103,9 +103,9 @@ extern "C" {
     MAT3D A[2][2];
   } MAT6D;
 
-  MAT6D set_mat6d(MAT3D, MAT3D, MAT3D, MAT3D);
+  void set_mat6d(MAT6D * m, const MAT3D * A00, const MAT3D * A01, const MAT3D * A10, const MAT3D * A11);
 
-  MAT6D rotate_mat6d(MAT3D, MAT6D);
+  void rotate_mat6d(MAT6D * result, const MAT3D * rot, const MAT6D * m);
 
 
   // 2d eigenvalue problem
@@ -121,21 +121,22 @@ extern "C" {
 
   int check_eigs(EigenSys);
 
-
+#ifdef ENABLE_DISPLAY_FUNCTIONS
   // display function
-  void print_vec2d(VEC2D, const char *);
+  void print_vec2d(const VEC2D * v, const char * name);
   
-  void print_vec3d(VEC3D, const char *);
+  void print_mat2d(const MAT2D * m, const char * name);
 
-  void print_mat2d(MAT2D, const char *);
+  void print_vec3d(const VEC3D * v, const char * name);
 
-  void print_mat3d(MAT3D, const char *);
+  void print_mat3d(const MAT3D * m, const char * name);
 
-  void print_vec6d(VEC6D, const char *);
+  void print_vec6d(const VEC6D * v, const char * name);
 
-  void print_mat6d(MAT6D, const char *);
+  void print_mat6d(const MAT6D * m, const char * name);
 
   void print_eigs(EigenSys, const char *);
+#endif
 
 #ifdef __cplusplus
 }

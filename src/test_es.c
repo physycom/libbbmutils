@@ -9,8 +9,8 @@ int main() {
 
   printf("---- TEST 2D EIGENSYSTEM MATH_LIB ----\n");
 
-  m = set_mat2d( 0.0,  1.0,
-                -2.0, -3.0);
+  set_mat2d(&m, 0.0,  1.0,
+               -2.0, -3.0);
 
   EigenSys es = eigs_2x2_sym(m);
 

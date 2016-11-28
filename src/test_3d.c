@@ -5,32 +5,44 @@
 #include "math_lib.h"
 
 int main() {
-  VEC3D v, axis;
-  MAT3D rot, m;
+  VEC3D v, u, vr, ur, axis;
+  MAT3D m, mt, m2, mr, rot;
   double angle;
 
   printf("---- TEST 3D MATH_LIB ----\n");
 
-  v = set_vec3d(1.0, 1.0, 0.0);
+  set_vec3d(&v, 1.0, 1.0, 0.0);
+  print_vec3d(&v, "\n3d vector = v");
 
-  m = set_mat3d(1.0, 0.0, 0.0, 
-                0.0, 2.0, 0.0, 
-                0.0, 0.0, 3.0);
+  set_mat3d(&m, 1.0, 0.0, -1.0, 
+                0.0, 2.0,  0.0, 
+                0.0, 0.0,  3.0);
+  print_mat3d(&m, "\n3d matrix = A");
+
+  rotate_vec3d(&u, &m, &v);
+  print_vec3d(&u, "\n3d vector (test product) = u = Av");
+
+  transpose_mat3d(&mt, &m);
+  print_mat3d(&mt, "\n3d matrix (test transpose) = At");
+
+  product_mat3d(&m2, &m, &m);
+  print_mat3d(&m2, "\n3d matrix (test product) = A A");
 
   angle = M_PI / 2;
-  axis = set_vec3d(1.0, 0.0, 0.0);
-  rot = make_rotation(axis, angle);
+  set_vec3d(&axis, 1.0, 0.0, 0.0);
+  make_rotation(&rot, &axis, angle);
+  print_mat3d(&rot, "\n3d matrix (rotation) = R");
 
-  printf("angle = %5.2f\n", angle*180.0 / M_PI);
-  print_vec3d(axis, "n");
-  print_mat3d(rot, "rot");
-  print_mat3d(transpose_mat3d(rot), "rot (test transpose)");
-  print_vec3d(v, "\nv");
-  print_vec3d(rotate_vec3d(rot, v), "v_rotated");
-  print_mat3d(m, "\nm");
-  print_mat3d(rotate_mat3d(rot, m), "m_rotated");
-  print_mat3d(product_mat3d(product_mat3d(rot, m), transpose_mat3d(rot)), "m_rotated (test product)");
+  rotate_vec3d(&vr, &rot, &v);
+  print_vec3d(&vr, "\n3d vector (test rotation) = Rv");
 
+  rotate_mat3d(&mr, &rot, &m);
+  print_mat3d(&mr, "\n3d matrix (test rotation) = B = R A Rt");
+
+  rotate_vec3d(&ur, &rot, &u);
+  print_vec3d(&ur, "\n3d vector = Ru");
+  rotate_vec3d(&ur, &mr, &vr);
+  print_vec3d(&ur, "\n3d vector = Bu");
 
   return 0;
 }
