@@ -28,14 +28,12 @@ dirs:
 	@[ -d $(OBJ_FOLDER) ] || mkdir -p $(OBJ_FOLDER)
 	@[ -d $(TEST_FOLDER) ] || mkdir -p $(TEST_FOLDER)
 
-$(BIN_FOLDER)/%.exe: $(BIN_FOLDER)/%.o
+$(BIN_FOLDER)/%.exe: $(SRC_FOLDER)/%.c
 	gcc -o $@ $(OBJ_LIB) $<
-
-$(BIN_FOLDER)/%.o: $(SRC_FOLDER)/%.c
-	gcc -c -o $@ $<
 
 $(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.c $(SRC_FOLDER)/%.h
 	gcc -c -o $@ $<
 
 clean:
-	rm -rf bin/*.exe obj/math_lib.o
+	rm -f $(OBJ_LIB) $(TEST_EXE)
+
