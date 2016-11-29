@@ -225,3 +225,4 @@ ModelManifest.xml
 *.txt
 *.json
 test/
+.DS_Store
