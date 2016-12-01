@@ -29,10 +29,10 @@ dirs:
 	@[ -d $(TEST_FOLDER) ] || mkdir -p $(TEST_FOLDER)
 
 $(BIN_FOLDER)/%.exe: $(SRC_FOLDER)/%.c
-	gcc -o $@ $(OBJ_LIB) $< -lm
+	$(CC) -o $@ $(OBJ_LIB) $< -lm
 
 $(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.c $(SRC_FOLDER)/%.h
-	gcc -c -o $@ $<
+	$(CC) -c -o $@ $<
 
 clean:
 	rm -f $(OBJ_LIB) $(TEST_EXE)
