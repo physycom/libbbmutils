@@ -29,7 +29,7 @@ dirs:
 	@[ -d $(TEST_FOLDER) ] || mkdir -p $(TEST_FOLDER)
 
 $(BIN_FOLDER)/%.exe: $(SRC_FOLDER)/%.c
-	gcc -o $@ $(OBJ_LIB) $<
+	gcc -o $@ $(OBJ_LIB) $< -lm
 
 $(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.c $(SRC_FOLDER)/%.h
 	gcc -c -o $@ $<
