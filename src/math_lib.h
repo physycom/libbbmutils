@@ -1,14 +1,43 @@
+/**
+ * @file   math_lib.h
+ * @Author A. Fabbri (alessandro.fabbri27@unibo.it), S. Sinigardi (stefano.sinigardi@unibo.it)
+ * @date   February, 2016
+ * @brief  This header file contains the declaration of structs and functions for the mathematical framework.
+ * 
+ * This header file contains the declaration of the basic types of objects which implements the 2D/3D/6D vector algebra, the 2D/3D/6D matrix algebra and some utilities for the solution of a 2x2 eigenvalue problem for symmetric matrices (based on analytical solutions).
+ *
+ */
+
+#ifndef PHYSYCOM_MATH_LIB_H
+#define PHYSYCOM_MATH_LIB_H
+
 #define ENABLE_DISPLAY_FUNCTIONS
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-  // 2d vector algebra
+/*! \struct VEC2D
+ *  \brief Two-dimensional vector object
+ *
+ *  This object holds the data for representing a 2D vector
+ */
   typedef struct VEC2D {
-    double x, y, mod;
+    double x;   /*!< The 2D vector \f$x\f$ coordinate */
+    double y;   /*!< The 2D vector \f$y\f$ coordinate */
+    double mod; /*!< The 2D vector modulus \f$\sqrt{x^2 + y^2}\f$ */
   } VEC2D;
 
+/*! \name 2D Vector algebra functions
+ *  Utilities to handle with elementary algebraic 2D operations on vectors
+ */
+///@{
+/*! \function set_vec2d
+ *  \brief Function to populate 2D vector.
+ *  \param v a pointer to the vector to be populated.
+ *  \param x a double representing the \f$x\f$ coordinate. 
+ *  \param y a double representing the \f$y\f$ coordinate. 
+ */
   void set_vec2d(VEC2D * v, const double x, const double y);
 
   void setmod_vec2d(VEC2D * v);
@@ -20,13 +49,29 @@ extern "C" {
   double prod_cross_2d(const VEC2D * v, const VEC2D * u);            // returns z-component on a right-handed frame
 
   void multiply_vec2d(VEC2D * v, const double alpha);
+///@}
 
-
-  // 2d matrix algebra
+/*! \struct MAT2D
+ *  \brief Two-dimensional matrix object
+ *
+ *  This object holds the data for representing a 2D square matrix
+ */
   typedef struct MAT2D {
     double xx, xy, yx, yy;
   } MAT2D;
 
+/*! \name 2D Matrix algebra functions
+ *  Utilities to handle with elementary algebraic 2D operations on square matrices
+ */
+///@{
+/*! \function set_mat2d
+ *  \brief Function to populate 2D matrix.
+ *  \param m a pointer to the vector to be populated.
+ *  \param xx a double representing the element \f$a_{00}\f$ of the matrix. 
+ *  \param xy a double representing the element \f$a_{01}\f$ of the matrix. 
+ *  \param yx a double representing the element \f$a_{10}\f$ of the matrix. 
+ *  \param yy a double representing the element \f$a_{11}\f$ of the matrix. 
+ */
   void set_mat2d(MAT2D * m, double xx, double xy, double yx, double yy);
   
   void transpose_mat2d(MAT2D * mt, const MAT2D * m);
@@ -42,13 +87,28 @@ extern "C" {
   void rotate_vec2d(VEC2D * result, const MAT2D * rot, const VEC2D * v);
 
   void rotate_mat2d(MAT2D * result, const MAT2D * rot, const MAT2D * m);
+///@}
 
-
-  // 3d vector algebra
+/*! \struct VEC3D
+ *  \brief Three-dimensional vector object.
+ *
+ *  This object holds the data for representing a 3D vector.
+ */
   typedef struct VEC3D {
     double x, y, z, mod;
   } VEC3D;
 
+/*! \name 3D Matrix algebra functions
+ *  Utilities to handle with elementary algebraic 3D operations on vectors.
+ */
+///@{
+/*! \function set_vec3d
+ *  \brief Function to populate 3D vector.
+ *  \param v a pointer to the vector to be populated.
+ *  \param x a double representing the \f$x\f$ coordinate. 
+ *  \param y a double representing the \f$y\f$ coordinate. 
+ *  \param z a double representing the \f$z\f$ coordinate. 
+ */
   void set_vec3d(VEC3D * v, const double x, const double y, const double z);
 
   void setmod_vec3d(VEC3D * v);
@@ -60,13 +120,34 @@ extern "C" {
   void prod_cross_3d(VEC3D * result, const VEC3D * a, const VEC3D * b);
 
   void multiply_vec3d(VEC3D * v, const double alpha);
+///@}
 
-
-  // 3d matrix algebra
+/*! \struct MAT3D
+ *  \brief Three-dimensional square matrix object.
+ *
+ *  This object holds the data for representing a 3D square matrix.
+ */
   typedef struct MAT3D {
     double xx, xy, xz, yx, yy, yz, zx, zy, zz;
   } MAT3D;
 
+/*! \name 3D Matrix algebra functions
+ *  Utilities to handle with elementary algebraic 3D operations on square matrices.
+ */
+///@{
+/*! \function set_mat3d
+ *  \brief Function to populate 3D vector.
+ *  \param v a pointer to the vector to be populated.
+ *  \param xx a double representing the element \f$a_{00}\f$ of the matrix. 
+ *  \param xy a double representing the element \f$a_{01}\f$ of the matrix. 
+ *  \param yz a double representing the element \f$a_{02}\f$ of the matrix. 
+ *  \param yx a double representing the element \f$a_{10}\f$ of the matrix. 
+ *  \param yy a double representing the element \f$a_{11}\f$ of the matrix. 
+ *  \param yz a double representing the element \f$a_{12}\f$ of the matrix. 
+ *  \param zx a double representing the element \f$a_{20}\f$ of the matrix. 
+ *  \param zy a double representing the element \f$a_{21}\f$ of the matrix. 
+ *  \param zz a double representing the element \f$a_{22}\f$ of the matrix. 
+ */
   void set_mat3d(MAT3D * m, const double xx, const double xy, const double xz, const double yx, const double yy, const double yz, const double zx, const double zy, const double zz);
 
   void transpose_mat3d(MAT3D * result, const MAT3D * m);
@@ -82,40 +163,96 @@ extern "C" {
   void rotate_vec3d(VEC3D * result, const MAT3D * rot, const VEC3D * v);
 
   void rotate_mat3d(MAT3D * result, const MAT3D * rot, const MAT3D * m);
+///@}
 
-
-  // 6d vector
+/*! \struct VEC6D
+ *  \brief Six-dimensional vector object.
+ *
+ *  This object holds the data for representing a 6D vector. More precisely, this is not an element of the vector space \f$\mathbb{R}^6\f$ rather it represent a collection of two 3D vectors and provides utilities function to manipulate them at once.
+ */
   typedef struct VEC6D {
-    VEC3D a, g;
+    VEC3D a;  /*!< The first 6D vector sub-object */ 
+    VEC3D g;  /*!< The second 6D vector sub-object */ 
   } VEC6D;
 
+/*! \name 6D Vector algebra functions
+ *  Utilities to handle with elementary algebraic 6D operations on vectors.
+ */
+///@{
+/*! \function set_vec6d
+ *  \brief Function to populate 6D vector.
+ *  \param v a pointer to the vector to be populated.
+ *  \param ax a double representing the \f$x\f$ coordinate of first vector. 
+ *  \param ay a double representing the \f$y\f$ coordinate of first vector. 
+ *  \param az a double representing the \f$z\f$ coordinate of first vector. 
+ *  \param gx a double representing the \f$x\f$ coordinate of second vector. 
+ *  \param gy a double representing the \f$y\f$ coordinate of second vector. 
+ *  \param gz a double representing the \f$z\f$ coordinate of second vector. 
+ */
   void set_vec6d(VEC6D * v, const double ax, const double ay, const double az, const double gx, const double gy, const double gz);
 
   void rotate_vec6d(VEC6D * result, const MAT3D * rot, const VEC6D * v);
+///@}
 
-
-  // 6d matrix
+/*! \struct MAT6D
+ *  \brief Six-dimensional square matrix object.
+ *
+ *  This object holds the data for representing a 6D square matrix. 
+ */
   typedef struct MAT6D {
     MAT3D A[2][2];
   } MAT6D;
 
+/*! \name 6D Square matrix algebra functions
+ *  Utilities to handle with elementary algebraic 6D operations on square matrices.
+ */
+///@{
+/*! \function set_mat6d
+ *  \brief Function to populate 6D matrix.
+ *  \param m a pointer to the matrix to be populated.
+ *  \param A00 a pointer to 3D matrix representing the \f$A_{00}\f$ sub-matrix. 
+ *  \param A01 a pointer to 3D matrix representing the \f$A_{01}\f$ sub-matrix.
+ *  \param A10 a pointer to 3D matrix representing the \f$A_{10}\f$ sub-matrix.
+ *  \param A11 a pointer to 3D matrix representing the \f$A_{11}\f$ sub-matrix.
+ */
   void set_mat6d(MAT6D * m, const MAT3D * A00, const MAT3D * A01, const MAT3D * A10, const MAT3D * A11);
 
   void rotate_mat6d(MAT6D * result, const MAT3D * rot, const MAT6D * m);
+///@}
 
-
-  // 2d eigenvalue problem
+/*! \struct EigenSys
+ *  \brief Object containing the data for a 2D eigenvalue problem.
+ *
+ *  This object holds the data related to a two-dimensional real-valued eigenvalue problem for symmetric matrices. 
+ */
   typedef struct EigenSys {
-    MAT2D A;
-    double l1, l2;
-    VEC2D v1, v2, u1, u2;
+    MAT2D A;    /*!< The 2D symmetric matrix to be diagonalized. */  
+    double l1;  /*!< Largest eigenvalue. */ 
+    double l2;  /*!< Smallest eigenvalue. */ 
+    VEC2D v1;   /*!< Eigenvector corresponding to the largest eigenvalue. */
+    VEC2D v2;   /*!< Eigenvector corresponding to the smallest eigenvalue. */
+    VEC2D u1;   /*!< Normalized eigenvector corresponding to the largest eigenvalue. */
+    VEC2D u2;   /*!< Normalized eigenvector corresponding to the smallest eigenvalue. */
   } EigenSys;
 
-  EigenSys eigs_2x2_sym_normalized(double, double);
+/*! \name 2D Eigenproblems utilities
+ *  Tools to set up and solve the eigenvalue problem for input 2D symmetric real-valued matrices.
+ */
+///@{
+/*! \function eigs_2x2_sym_normalized
+ *  \brief Return the eigensystem of a 2D matrix.
+ *
+ *  Routine that solves, by means of exact analytical formulas, the eigenvalue for a matrix of the form \f$\left( \begin{array}{cc} 1 & a \\ a & b\end{array} \right)\f$, for real \f$a,b\f$.
+ *
+ *  \param a element \f$a_{01} = a_{10}\f$ of the matrix.
+ *  \param b element \f$a_{11}\f$ of the matrix.
+ */
+  EigenSys eigs_2x2_sym_normalized(double a, double b);
 
-  EigenSys eigs_2x2_sym(MAT2D);
+  EigenSys eigs_2x2_sym(MAT2D m);
 
-  int check_eigs(EigenSys);
+  int check_eigs(EigenSys es);
+///@}
 
 #ifdef ENABLE_DISPLAY_FUNCTIONS
   // display function
@@ -136,4 +273,6 @@ extern "C" {
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif

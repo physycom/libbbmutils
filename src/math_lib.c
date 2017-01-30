@@ -5,7 +5,7 @@
 
 #include "math_lib.h"
 
-#define RAD_TO_DEG    57.2957795131             // 180/pi
+#define RAD_TO_DEG    57.2957795131             /* 180/pi */
 
 #ifndef M_PI
 #define M_PI          3.14159265358979323846    /* pi */

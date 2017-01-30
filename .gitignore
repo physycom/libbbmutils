@@ -226,3 +226,5 @@ ModelManifest.xml
 *.json
 test/
 .DS_Store
+doc/*
+
