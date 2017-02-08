@@ -73,8 +73,25 @@ extern "C" {
  */
   double prod_dot_2d(const VEC2D * v, const VEC2D * u);
 
-  double prod_cross_2d(const VEC2D * v, const VEC2D * u);            // returns z-component on a right-handed frame
+/*! \function
+ *  \brief Function to evaluate the cross product.
+ *
+ *  This routine evaluates the \f$z\f$ coordinate of cross product between two 2D vectors, by means of \f$\vec{a} \cdot \vec{b} \cdot \hat{k} = a_x b_y - a_y b_x\f$. The positive direction of the \f$z\f$ axis is assumed to be pointing outward the screen.
+ *
+ *  \param v a pointer to the first vector.
+ *  \param u a pointer to the second vector.
+ *  \return The \f$z\f$ coordinate of the cross product.
+ */
+  double prod_cross_2d(const VEC2D * v, const VEC2D * u);
 
+/*! \function
+ *  \brief Function to multiply a vector by a scalar.
+ *
+ *  This routine implements the multiplication of a vector by a scalar. 
+ *
+ *  \param v a pointer to the vector to be multiplied.
+ *  \param alpha the scalar multiplier.
+ */
   void multiply_vec2d(VEC2D * v, const double alpha);
 ///@}
 
