@@ -13,6 +13,7 @@ author: "Fabbri, Sinigardi"
 <div class="image">
 <img src="https://travis-ci.com/physycom/math_lib.svg?token=ujjUseBa9hYbKckXBkxJ&branch=master" width="90" height="20" alt="Build Status"> 
 </div>
+</a>
 
 ## Purpose
 This document presents a plain C library designed to handle vector and matrix algebra and 2x2 eigenvalue problems for symmetric matrices.
