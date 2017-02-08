@@ -1,0 +1,12 @@
+sudo: false
+language: c
+addons:
+  apt:
+    packages:
+    - gcc
+install:
+    - export CC="/usr/bin/gcc"
+compiler:
+  - gcc
+script:
+  - make all

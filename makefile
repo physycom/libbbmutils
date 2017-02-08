@@ -4,13 +4,22 @@ OBJ_FOLDER  = obj
 TEST_FOLDER = test
 DOC_FOLDER  = doc
 
-TEST_SCRIPT = ./$(SRC_FOLDER)/test_all.sh
+TEST_SCRIPT = $(SRC_FOLDER)/test_all.sh
 
 TEST        = test_2d test_3d test_6d test_es
 TEST_EXE    = $(addprefix $(BIN_FOLDER)/,$(addsuffix .exe, $(basename $(TEST))))
 
 OBJ         = math_lib
 OBJ_LIB     = $(addprefix $(OBJ_FOLDER)/,$(addsuffix .o, $(basename $(OBJ))))
+
+all: dirs
+all: $(OBJ_LIB)
+all: $(TEST_EXE)
+
+dirs:
+	@mkdir -p $(BIN_FOLDER)
+	@mkdir -p $(OBJ_FOLDER)
+	@mkdir -p $(TEST_FOLDER)
 
 doc: Doxyfile $(SRC_FOLDER)/* README.md
 	mkdir -p $(DOC_FOLDER); \
@@ -25,15 +34,6 @@ test: $(TEST_EXE) $(OBJ_LIB)
 	@./$(BIN_FOLDER)/test_es.exe > $(TEST_FOLDER)/test_es.log
 	@echo "Running tests..."
 	@$(TEST_SCRIPT)
-
-all: dirs
-all: $(OBJ_LIB)
-all: $(TEST_EXE)
-
-dirs:
-	@mkdir -p $(BIN_FOLDER)
-	@mkdir -p $(OBJ_FOLDER)
-	@mkdir -p $(TEST_FOLDER)
 
 $(BIN_FOLDER)/%.exe: $(SRC_FOLDER)/%.c
 	$(CC) -o $@ $(OBJ_LIB) $< -lm
