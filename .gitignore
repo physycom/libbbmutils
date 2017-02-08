@@ -227,4 +227,4 @@ ModelManifest.xml
 test/
 .DS_Store
 doc/*
-
+doxy_header.tex
