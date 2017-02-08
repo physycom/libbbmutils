@@ -11,6 +11,7 @@
 #ifndef PHYSYCOM_MATH_LIB_H
 #define PHYSYCOM_MATH_LIB_H
 
+/*! Symbol to include the built-in display functions. */
 #define ENABLE_DISPLAY_FUNCTIONS
 
 #ifdef __cplusplus
@@ -32,10 +33,10 @@ extern "C" {
  *  Utilities to handle with elementary algebraic 2D operations on vectors
  */
 ///@{
-/*! \function set_vec2d
+/*! \function
  *  \brief Function to populate 2D vector.
  *
- *  This routine set the values of the coordinates and also evaluates the modulus, setting it to zero below a threshold of \f$10^{-8}\f$.
+ *  This routine sets the values of the coordinates and also evaluates the modulus, setting it to zero below a threshold of #EPSILON.
  *
  *  \param v a pointer to the vector to be populated.
  *  \param x a double representing the \f$x\f$ coordinate. 
@@ -43,19 +44,33 @@ extern "C" {
  */
   void set_vec2d(VEC2D * v, const double x, const double y);
 
-/*! \function set_vec2d
- *  \brief Function to populate 2D vector.
+/*! \function
+ *  \brief Function to automatically set vector modulus from its coordinates.
  *
- *  This routine set the values of the coordinates and also evaluates the modulus, setting it to zero below a threshold of \f$10^{-8}\f$.
+ *  This routine sets the value of the 2D vector modulus calculating it from the coordinates values, setting it to zero below a threshold of #EPSILON.
  *
- *  \param v a pointer to the vector to be populated.
- *  \param x a double representing the \f$x\f$ coordinate. 
- *  \param y a double representing the \f$y\f$ coordinate. 
+ *  \param v a pointer to the vector.
  */
   void setmod_vec2d(VEC2D * v);
 
+/*! \function
+ *  \brief Function to normalize the vector.
+ *
+ *  This routine normalizes the 2D vector, by dividing VEC2D::x and VEC2D::y by VEC2D::mod. Then VEC2D::mod is set to \f$1.0\f$, so a small numerical mismatch between last value and the square root of coordintes' squares sum can occur.
+ *
+ *  \param v a pointer to the vector.
+ */
   void normalize_vec2d(VEC2D * v);
 
+/*! \function
+ *  \brief Function to evaluate the scalar product.
+ *
+ *  This routine evaluates the scalar product between two 2D vectors, by means of \f$\vec{a} \cdot \vec{b} = a_x b_x + a_y b_y\f$.
+ *
+ *  \param v a pointer to the first vector.
+ *  \param u a pointer to the second vector.
+ *  \return Scalar product value.
+ */
   double prod_dot_2d(const VEC2D * v, const VEC2D * u);
 
   double prod_cross_2d(const VEC2D * v, const VEC2D * u);            // returns z-component on a right-handed frame
@@ -86,7 +101,7 @@ extern "C" {
  */
   void set_mat2d(MAT2D * m, double xx, double xy, double yx, double yy);
 
-/*! \function transpose_mat2d
+/*! \function
  *  \brief Function to populate 2D matrix.
  *  \param m a pointer to the vector to be populated.
  *  \param xx a double representing the element \f$a_{00}\f$ of the matrix. 
@@ -122,7 +137,7 @@ extern "C" {
  *  Utilities to handle with elementary algebraic 3D operations on vectors.
  */
 ///@{
-/*! \function set_vec3d
+/*! \function 
  *  \brief Function to populate 3D vector.
  *  \param v a pointer to the vector to be populated.
  *  \param x a double representing the \f$x\f$ coordinate. 
@@ -155,7 +170,7 @@ extern "C" {
  *  Utilities to handle with elementary algebraic 3D operations on square matrices.
  */
 ///@{
-/*! \function set_mat3d
+/*! \function 
  *  \brief Function to populate 3D vector.
  *  \param v a pointer to the vector to be populated.
  *  \param xx a double representing the element \f$a_{00}\f$ of the matrix. 
@@ -199,7 +214,7 @@ extern "C" {
  *  Utilities to handle with elementary algebraic 6D operations on vectors.
  */
 ///@{
-/*! \function set_vec6d
+/*! \function 
  *  \brief Function to populate 6D vector.
  *  \param v a pointer to the vector to be populated.
  *  \param ax a double representing the \f$x\f$ coordinate of first vector. 
@@ -227,7 +242,7 @@ extern "C" {
  *  Utilities to handle with elementary algebraic 6D operations on square matrices.
  */
 ///@{
-/*! \function set_mat6d
+/*! \function 
  *  \brief Function to populate 6D matrix.
  *  \param m a pointer to the matrix to be populated.
  *  \param A00 a pointer to 3D matrix representing the \f$A_{00}\f$ sub-matrix. 
@@ -259,7 +274,7 @@ extern "C" {
  *  Tools to set up and solve the eigenvalue problem for input 2D symmetric real-valued matrices.
  */
 ///@{
-/*! \function eigs_2x2_sym_normalized
+/*! \function 
  *  \brief Return the eigensystem of a 2D matrix.
  *
  *  Routine that solves, by means of exact analytical formulas, the eigenvalue for a matrix of the form \f$\left( \begin{array}{cc} 1 & a \\ a & b\end{array} \right)\f$, for real \f$a,b\f$.
@@ -275,7 +290,18 @@ extern "C" {
 ///@}
 
 #ifdef ENABLE_DISPLAY_FUNCTIONS
-  // display function
+/*! \name Display functions
+ *  Support function to display the value of the various mathematical objects.
+ */
+///@{
+/*! \function 
+ *  \brief Display 2D vector.
+ *
+ *  This routine displays to stdout the coordinates of a given vector along with a given name for it.
+ *
+ *  \param v pointer to the vector to be displayed.
+ *  \param name a char pointer containing the name of the vector.
+ */
   void print_vec2d(const VEC2D * v, const char * name);
   
   void print_mat2d(const MAT2D * m, const char * name);
@@ -289,6 +315,7 @@ extern "C" {
   void print_mat6d(const MAT6D * m, const char * name);
 
   void print_eigs(EigenSys, const char *);
+///@}
 #endif
 
 #ifdef __cplusplus

@@ -1,7 +1,7 @@
 ---
 documentclass: physycomen
 title:  "math_lib"
-author: "Di Cristina, Fabbri, Guidetti, Sinigardi"
+author: "Fabbri, Sinigardi"
 ---
 
 <a href="http://www.physycom.unibo.it"> 

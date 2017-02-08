@@ -1,3 +1,4 @@
+/*! \file */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>     // memset
@@ -5,12 +6,15 @@
 
 #include "math_lib.h"
 
+/*! \brief \f$ 180/\pi \f$, to convert from radians to degree. */
 #define RAD_TO_DEG    57.2957795131             /* 180/pi */
 
 #ifndef M_PI
+/*! \brief \f$ \pi \f$. */
 #define M_PI          3.14159265358979323846    /* pi */
 #endif
 
+/*! \brief Zero threshold for numerically null vectors. */
 #define EPSILON       1e-8
 
 // 2d vector algebra
