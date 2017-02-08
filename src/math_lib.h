@@ -87,7 +87,7 @@ extern "C" {
 /*! \function
  *  \brief Function to multiply a vector by a scalar.
  *
- *  This routine implements the multiplication of a vector by a scalar. 
+ *  This routine implements the multiplication of a 2D vector by a scalar, the original vector coordinates are overwritten in the process.
  *
  *  \param v a pointer to the vector to be multiplied.
  *  \param alpha the scalar multiplier.
@@ -101,7 +101,10 @@ extern "C" {
  *  This object holds the data for representing a 2D square matrix
  */
   typedef struct MAT2D {
-    double xx, xy, yx, yy;  /*!< Generic comment */
+    double xx;  /*! The element \f$a_{00}\f$ of the matrix. */
+    double xy;  /*! The element \f$a_{01}\f$ of the matrix. */
+    double yx;  /*! The element \f$a_{10}\f$ of the matrix. */
+    double yy;  /*! The element \f$a_{11}\f$ of the matrix. */
   } MAT2D;
 
 /*! \name 2D Matrix algebra functions
@@ -110,7 +113,10 @@ extern "C" {
 ///@{
 /*! \function set_mat2d
  *  \brief Function to populate 2D matrix.
- *  \param m a pointer to the vector to be populated.
+ *
+ *  This routine sets the value of the matrix elements.
+ *
+ *  \param m a pointer to the matrix to be populated.
  *  \param xx a double representing the element \f$a_{00}\f$ of the matrix. 
  *  \param xy a double representing the element \f$a_{01}\f$ of the matrix. 
  *  \param yx a double representing the element \f$a_{10}\f$ of the matrix. 
@@ -119,25 +125,77 @@ extern "C" {
   void set_mat2d(MAT2D * m, double xx, double xy, double yx, double yy);
 
 /*! \function
- *  \brief Function to populate 2D matrix.
- *  \param m a pointer to the vector to be populated.
- *  \param xx a double representing the element \f$a_{00}\f$ of the matrix. 
- *  \param xy a double representing the element \f$a_{01}\f$ of the matrix. 
- *  \param yx a double representing the element \f$a_{10}\f$ of the matrix. 
- *  \param yy a double representing the element \f$a_{11}\f$ of the matrix. 
- */  
+ *  \brief Function to transpose a 2D matrix.
+ *
+ *  This routine evaluates the transpose of a given matrix, i.e. a matrix \f$B\f$ whose elements are given by \f$ b_{ij} = a_{ji}\f$ in terms of the elements of the original matrix \f$A\f$.
+ *
+ *  \param mt a pointer to a matrix to store the transposition result.
+ *  \param m a pointer to the original matrix.
+ */
   void transpose_mat2d(MAT2D * mt, const MAT2D * m);
 
+/*! \function
+ *  \brief Function to multiply two 2D matrix.
+ *
+ *  This routine evaluates the product of two given matrices \f$A\f$ and \f$B\f$ according to the standard rule \f$c_{ij} = a_{ik} b_{kj}\f$ (Einstein summation convention assumed).
+ *
+ *  \param result a pointer to a matrix to store the product result.
+ *  \param a a pointer to the left matrix.
+ *  \param a a pointer to the right matrix.
+ */
   void product_mat2d(MAT2D * result, const MAT2D * a, const MAT2D * b);
 
-  void multiply_mat2d(double, MAT2D *);
+/*! \function
+ *  \brief Function to multiply a 2D matrix by a scalar.
+ *
+ *  This routine implements the multiplication of a given matrix by a given scalar, the original matrix elements are overwritten in the process.
+ *
+ *  \param alpha a double representing the scalar factor.
+ *  \param m a pointer to matrix to be multiplied.
+ */
+  void multiply_mat2d(double alpha, MAT2D * m);
 
+/*! \function
+ *  \brief Function to generate a 2D rotation.
+ *
+ *  This routine populates a matrix with the values corresponding to a counter-clockwise rotation around the origin of an angle whose sine and cosine values are provided, namely \f$\left( \begin{array}{cc} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{array} \right)\f$. It is implemented as an inline function.
+ *
+ *  \param rot a pointer to the rotation matrix to be populated.
+ *  \param c the cosine of the rotation angle \f$\cos \theta\f$.
+ *  \param s the sine of the rotation angle \f$\sin \theta\f$.
+ */
   void make_rotation_2d_cs(MAT2D * rot, const double c, const double s);
 
+/*! \function
+ *  \brief Function to generate a 2D rotation.
+ *
+ *  This routine populates a matrix with the values corresponding to a counter-clockwise rotation around the origin of an angle in radians, namely \f$\left( \begin{array}{cc} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{array} \right)\f$.
+ *
+ *  \param rot a pointer to the rotation matrix to be populated.
+ *  \param angle the angle of rotation in radians.
+ */
   void make_rotation_2d(MAT2D * rot, const double angle);
 
+/*! \function
+ *  \brief Function to apply a rotation to a 2D vector.
+ *
+ *  This routine rotates a given vector with a given rotation matrix, it actually implements the product of a 2D matrix with a 2D vector, namely \f$u_i = a_{ij}v_j\f$ (Einstein summation convention assumed).
+ *
+ *  \param result a pointer to 2D vector to store the result.
+ *  \param rot a pointer to the (rotation) matrix to be applied.
+ *  \param v a pointer to the original vector.
+ */
   void rotate_vec2d(VEC2D * result, const MAT2D * rot, const VEC2D * v);
 
+/*! \function
+ *  \brief Function to apply a rotation to a 2D matrix.
+ *
+ *  This routine rotates a given matrix with a given rotation matrix, it actually implements the matrix transformation \f$A \rightarrow R^T A R\f$, orthogonal matrix version of a matrix similarity transformation.
+ *
+ *  \param result a pointer to 2D matrix to store the result.
+ *  \param rot a pointer to the (rotation) matrix to be applied.
+ *  \param m a pointer to the original matrix.
+ */
   void rotate_mat2d(MAT2D * result, const MAT2D * rot, const MAT2D * m);
 ///@}
 

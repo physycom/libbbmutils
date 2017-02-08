@@ -12,7 +12,7 @@ TEST_EXE    = $(addprefix $(BIN_FOLDER)/,$(addsuffix .exe, $(basename $(TEST))))
 OBJ         = math_lib
 OBJ_LIB     = $(addprefix $(OBJ_FOLDER)/,$(addsuffix .o, $(basename $(OBJ))))
 
-doc: Doxyfile $(SRC_FOLDER)/math_lib.h README.md
+doc: Doxyfile $(SRC_FOLDER)/* README.md
 	mkdir -p $(DOC_FOLDER); \
 	doxygen Doxyfile; \
 #	cd $(DOC_FOLDER)/latex; \
