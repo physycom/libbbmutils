@@ -34,12 +34,24 @@ extern "C" {
 ///@{
 /*! \function set_vec2d
  *  \brief Function to populate 2D vector.
+ *
+ *  This routine set the values of the coordinates and also evaluates the modulus, setting it to zero below a threshold of \f$10^{-8}\f$.
+ *
  *  \param v a pointer to the vector to be populated.
  *  \param x a double representing the \f$x\f$ coordinate. 
  *  \param y a double representing the \f$y\f$ coordinate. 
  */
   void set_vec2d(VEC2D * v, const double x, const double y);
 
+/*! \function set_vec2d
+ *  \brief Function to populate 2D vector.
+ *
+ *  This routine set the values of the coordinates and also evaluates the modulus, setting it to zero below a threshold of \f$10^{-8}\f$.
+ *
+ *  \param v a pointer to the vector to be populated.
+ *  \param x a double representing the \f$x\f$ coordinate. 
+ *  \param y a double representing the \f$y\f$ coordinate. 
+ */
   void setmod_vec2d(VEC2D * v);
 
   void normalize_vec2d(VEC2D * v);
@@ -57,7 +69,7 @@ extern "C" {
  *  This object holds the data for representing a 2D square matrix
  */
   typedef struct MAT2D {
-    double xx, xy, yx, yy;
+    double xx, xy, yx, yy;  /*!< Generic comment */
   } MAT2D;
 
 /*! \name 2D Matrix algebra functions
@@ -73,7 +85,15 @@ extern "C" {
  *  \param yy a double representing the element \f$a_{11}\f$ of the matrix. 
  */
   void set_mat2d(MAT2D * m, double xx, double xy, double yx, double yy);
-  
+
+/*! \function transpose_mat2d
+ *  \brief Function to populate 2D matrix.
+ *  \param m a pointer to the vector to be populated.
+ *  \param xx a double representing the element \f$a_{00}\f$ of the matrix. 
+ *  \param xy a double representing the element \f$a_{01}\f$ of the matrix. 
+ *  \param yx a double representing the element \f$a_{10}\f$ of the matrix. 
+ *  \param yy a double representing the element \f$a_{11}\f$ of the matrix. 
+ */  
   void transpose_mat2d(MAT2D * mt, const MAT2D * m);
 
   void product_mat2d(MAT2D * result, const MAT2D * a, const MAT2D * b);
