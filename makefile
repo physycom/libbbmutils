@@ -2,7 +2,7 @@ BIN_FOLDER  = bin
 SRC_FOLDER  = src
 OBJ_FOLDER  = obj
 TEST_FOLDER = test
-DOC_FOLDER  = doc
+DOC_FOLDERS = doc/html doc/latex
 
 TEST_SCRIPT = $(SRC_FOLDER)/test_all.sh
 
@@ -13,22 +13,25 @@ OBJ         = math_lib
 OBJ_LIB     = $(addprefix $(OBJ_FOLDER)/,$(addsuffix .o, $(basename $(OBJ))))
 
 DOXYFILE    = doc/Doxyfile
+DOXY_HEADER = doc/doxy_header.tex
 
-all: dirs
-all: $(OBJ_LIB)
-all: $(TEST_EXE)
+all: dirs $(OBJ_LIB) $(TEST_EXE)
 
 dirs:
 	@mkdir -p $(BIN_FOLDER)
 	@mkdir -p $(OBJ_FOLDER)
 	@mkdir -p $(TEST_FOLDER)
+	@mkdir -p $(DOC_FOLDERS)
 
-doc:  $(SRC_FOLDER)/* README.md $(DOXYFILE)
+doc: dirs $(DOXY_HEADER) $(SRC_FOLDER)/* README.md $(DOXYFILE)
 	doxygen $(DOXYFILE); \
-#	cd doc/latex; \
-#	$(MAKE) 
+	cd doc/latex; \
+	$(MAKE) 
 
-test: $(TEST_EXE) $(OBJ_LIB)
+$(DOXY_HEADER): 
+	[ -f $(DOXY_HEADER) ] || curl -o $(DOXY_HEADER) https://raw.githubusercontent.com/physycom/templates/master/doxy_header.tex
+
+test: $(OBJ_LIB) $(TEST_EXE) 
 	@./$(BIN_FOLDER)/test_2d.exe > $(TEST_FOLDER)/test_2d.log
 	@./$(BIN_FOLDER)/test_3d.exe > $(TEST_FOLDER)/test_3d.log
 	@./$(BIN_FOLDER)/test_6d.exe > $(TEST_FOLDER)/test_6d.log
@@ -37,11 +40,11 @@ test: $(TEST_EXE) $(OBJ_LIB)
 	@$(TEST_SCRIPT)
 
 $(BIN_FOLDER)/%.exe: $(SRC_FOLDER)/%.c
-	$(CC) -o $@ $(OBJ_LIB) $< -lm
+	$(CC) -o $@ $(OBJ_LIB) $<
 
 $(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.c $(SRC_FOLDER)/%.h
 	$(CC) -c -o $@ $<
 
 clean:
-	rm -rf $(OBJ_LIB) $(TEST_EXE) $(DOC_FOLDER)
+	rm -rf $(OBJ_LIB) $(TEST_EXE) $(DOC_FOLDERS)
 

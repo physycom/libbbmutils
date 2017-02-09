@@ -29,7 +29,7 @@ The whole library is designed by making use of pointers in order to minimize the
 The library is also C++ compatible and comes equipped with a very basic test unit, try `make test`.
 
 ### Installation
-**make** and a **C/C++** compatible compiler are required. Clone the repo and type ``make``, it should be enough in most cases to build the lib. To run tests type ``make test``.   
+**make** and a **C/CXX** compatible compiler are required. Clone the repo and type ``make``, it should be enough in most cases to build the lib. To run tests type ``make test``.   
 There's also a **VS2015** solution avalaible.   
 Usually this library is deployed as a git submodule for other projects.
 

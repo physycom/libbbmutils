@@ -101,10 +101,10 @@ extern "C" {
  *  This object holds the data for representing a 2D square matrix
  */
   typedef struct MAT2D {
-    double xx;  /*! The element \f$a_{00}\f$ of the matrix. */
-    double xy;  /*! The element \f$a_{01}\f$ of the matrix. */
-    double yx;  /*! The element \f$a_{10}\f$ of the matrix. */
-    double yy;  /*! The element \f$a_{11}\f$ of the matrix. */
+    double xx;  /*!< The element \f$a_{00}\f$ of the matrix. */
+    double xy;  /*!< The element \f$a_{01}\f$ of the matrix. */
+    double yx;  /*!< The element \f$a_{10}\f$ of the matrix. */
+    double yy;  /*!< The element \f$a_{11}\f$ of the matrix. */
   } MAT2D;
 
 /*! \name 2D Matrix algebra functions
@@ -205,7 +205,10 @@ extern "C" {
  *  This object holds the data for representing a 3D vector.
  */
   typedef struct VEC3D {
-    double x, y, z, mod;
+    double x;    /*!< The 3D vector \f$x\f$ coordinate. */
+    double y;    /*!< The 3D vector \f$y\f$ coordinate. */
+    double z;    /*!< The 3D vector \f$z\f$ coordinate. */
+    double mod;  /*!< The 3D vector modulus \f$\sqrt{x^2 + y^2 + z^2}\f$. */
   } VEC3D;
 
 /*! \name 3D Matrix algebra functions
@@ -214,6 +217,9 @@ extern "C" {
 ///@{
 /*! \function 
  *  \brief Function to populate 3D vector.
+ *
+ *  This routine sets the values of the coordinates and also evaluates the modulus, setting it to zero below a threshold of #EPSILON.
+ *
  *  \param v a pointer to the vector to be populated.
  *  \param x a double representing the \f$x\f$ coordinate. 
  *  \param y a double representing the \f$y\f$ coordinate. 
@@ -221,8 +227,22 @@ extern "C" {
  */
   void set_vec3d(VEC3D * v, const double x, const double y, const double z);
 
+/*! \function
+ *  \brief Function to automatically set vector modulus from its coordinates.
+ *
+ *  This routine sets the value of the 3D vector modulus calculating it from the coordinates values, setting it to zero below a threshold of #EPSILON.
+ *
+ *  \param v a pointer to the vector.
+ */
   void setmod_vec3d(VEC3D * v);
 
+/*! \function
+ *  \brief Function to normalize a vector.
+ *
+ *  This routine normalizes a given 3D vector, by dividing VEC3D::x, VEC3D::y and VEC2D::z by VEC3D::mod. Then VEC3D::mod is set to \f$1.0\f$, so a small numerical mismatch between last value and the square root of coordintes' squares sum can occur.
+ *
+ *  \param v a pointer to the vector.
+ */
   void normalize_vec3d(VEC3D * v);
 
   double prod_dot_3d(const VEC3D * a, const VEC3D * b);
