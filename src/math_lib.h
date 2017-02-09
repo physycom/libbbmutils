@@ -76,7 +76,7 @@ extern "C" {
 /*! \function
  *  \brief Function to evaluate the cross product.
  *
- *  This routine evaluates the \f$z\f$ coordinate of cross product between two 2D vectors, by means of \f$\vec{a} \cdot \vec{b} \cdot \hat{k} = a_x b_y - a_y b_x\f$. The positive direction of the \f$z\f$ axis is assumed to be pointing outward the screen.
+ *  This routine evaluates the \f$z\f$ coordinate of cross product between two 2D vectors, by means of \f$\vec{a} \times \vec{b} \cdot \hat{k} = a_x b_y - a_y b_x\f$. The positive direction of the \f$z\f$ axis is assumed to be pointing outward the screen.
  *
  *  \param v a pointer to the first vector.
  *  \param u a pointer to the second vector.

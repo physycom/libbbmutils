@@ -12,6 +12,8 @@ TEST_EXE    = $(addprefix $(BIN_FOLDER)/,$(addsuffix .exe, $(basename $(TEST))))
 OBJ         = math_lib
 OBJ_LIB     = $(addprefix $(OBJ_FOLDER)/,$(addsuffix .o, $(basename $(OBJ))))
 
+DOXYFILE    = doc/Doxyfile
+
 all: dirs
 all: $(OBJ_LIB)
 all: $(TEST_EXE)
@@ -21,10 +23,9 @@ dirs:
 	@mkdir -p $(OBJ_FOLDER)
 	@mkdir -p $(TEST_FOLDER)
 
-doc: Doxyfile $(SRC_FOLDER)/* README.md
-	mkdir -p $(DOC_FOLDER); \
-	doxygen Doxyfile; \
-#	cd $(DOC_FOLDER)/latex; \
+doc:  $(SRC_FOLDER)/* README.md $(DOXYFILE)
+	doxygen $(DOXYFILE); \
+#	cd doc/latex; \
 #	$(MAKE) 
 
 test: $(TEST_EXE) $(OBJ_LIB)
