@@ -203,6 +203,5 @@ test/
 .DS_Store
 
 # Doxygen
-doc/*
-!doc/doxy_header.tex
+doc/
 !doc/Doxyfile
