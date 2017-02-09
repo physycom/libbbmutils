@@ -11,7 +11,7 @@
 #ifndef PHYSYCOM_MATH_LIB_H
 #define PHYSYCOM_MATH_LIB_H
 
-/*! Symbol to include the built-in display functions. */
+/*! Macro to include the built-in display functions. */
 #define ENABLE_DISPLAY_FUNCTIONS
 
 #ifdef __cplusplus
