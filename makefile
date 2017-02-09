@@ -40,7 +40,7 @@ test: $(OBJ_LIB) $(TEST_EXE)
 	@$(TEST_SCRIPT)
 
 $(BIN_FOLDER)/%.exe: $(SRC_FOLDER)/%.c
-	$(CC) -o $@ $(OBJ_LIB) $<
+	$(CC) -o $@ $(OBJ_LIB) $< -lm
 
 $(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.c $(SRC_FOLDER)/%.h
 	$(CC) -c -o $@ $<
