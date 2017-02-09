@@ -1,9 +1,9 @@
 # Modified variables
 PROJECT_NAME           = "math_lib"
 OUTPUT_DIRECTORY       = doc
-#USE_MDFILE_AS_MAINPAGE = ./README.md
+USE_MDFILE_AS_MAINPAGE = README.md
 INPUT                  = src
-#INPUT                  += ./
+INPUT                  += ./
 WARN_LOGFILE           = doc/warnings.txt
 EXTRA_PACKAGES         = amsfonts
 LATEX_HEADER           = doc/doxy_header.tex
