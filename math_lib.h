@@ -69,6 +69,7 @@ extern "C" {
  *
  *  \param v a pointer to the first vector.
  *  \param u a pointer to the second vector.
+ *
  *  \return Scalar product value.
  */
   double prod_dot_2d(const VEC2D * v, const VEC2D * u);
@@ -80,6 +81,7 @@ extern "C" {
  *
  *  \param v a pointer to the first vector.
  *  \param u a pointer to the second vector.
+ *
  *  \return The \f$z\f$ coordinate of the cross product.
  */
   double prod_cross_2d(const VEC2D * v, const VEC2D * u);
@@ -211,7 +213,7 @@ extern "C" {
     double mod;  /*!< The 3D vector modulus \f$\sqrt{x^2 + y^2 + z^2}\f$. */
   } VEC3D;
 
-/*! \name 3D Matrix algebra functions
+/*! \name 3D Vector algebra functions
  *  Utilities to handle with elementary algebraic 3D operations on vectors.
  */
 ///@{
@@ -241,24 +243,80 @@ extern "C" {
  *
  *  This routine normalizes a given 3D vector, by dividing VEC3D::x, VEC3D::y and VEC2D::z by VEC3D::mod. Then VEC3D::mod is set to \f$1.0\f$, so a small numerical mismatch between last value and the square root of coordintes' squares sum can occur.
  *
- *  \param v a pointer to the vector.
+ *  \param v a pointer to the vector to be normalized.
  */
   void normalize_vec3d(VEC3D * v);
 
+/*! \function
+ *  \brief Function to evaluate the scalar product.
+ *
+ *  This routine evaluates the scalar product between two 3D vectors, by means of \f$\vec{a} \cdot \vec{b} = a_x b_x + a_y b_y + a_z b_z\f$.
+ *
+ *  \param v a pointer to the first vector.
+ *  \param u a pointer to the second vector.
+ *
+ *  \return Scalar product value.
+ */
   double prod_dot_3d(const VEC3D * a, const VEC3D * b);
 
-  void prod_cross_3d(VEC3D * result, const VEC3D * a, const VEC3D * b);
+/*! \function
+ *  \brief Function to evaluate the cross product.
+ *
+ *  This routine evaluates the cross product between two 3D vectors, by means of 
+ *  \f[
+ *  \vec{a} \times \vec{b} = 
+ *  \left|
+ *  \begin{array}{ccc}
+ *  \hat{\imath} & \hat{\jmath} & \hat{k} \\
+ *  a_x & a_y & a_z \\
+ *  b_x & b_y & b_z \\
+ *  \end{array}
+ *  \right|
+ *  = \left( a_y b_z - a_z b_y \right) \hat{\imath} + \left( a_z b_x - a_x b_z \right) \hat{\jmath} + \left( a_x b_y - a_y b_x \right) \hat{k} 
+ *  \f]
+ *  The positive direction of the \f$z\f$ axis is assumed to be pointing outward the screen.
+ *
+ *  \param result a pointer to the 3D vector to store the result.
+ *  \param v a pointer to the first vector.
+ *  \param u a pointer to the second vector.
+ */
+  void prod_cross_3d(VEC3D * result, const VEC3D * v, const VEC3D * u);
 
+/*! \function
+ *  \brief Function to multiply a vector by a scalar.
+ *
+ *  This routine implements the multiplication of a 3D vector by a scalar, the original vector coordinates are overwritten in the process.
+ *
+ *  \param v a pointer to the vector to be multiplied.
+ *  \param alpha the scalar multiplier.
+ */
   void multiply_vec3d(VEC3D * v, const double alpha);
 ///@}
 
 /*! \struct MAT3D
  *  \brief Three-dimensional square matrix object.
  *
- *  This object holds the data for representing a 3D square matrix.
+ *  This object holds the data for representing a 3D square matrix. The matrix has the form
+ *  \f[
+ *  A = \left(
+ *  \begin{array}{ccc}
+ *  a_{00} & a_{01} & a_{02} \\
+ *  a_{10} & a_{11} & a_{12} \\
+ *  a_{20} & a_{21} & a_{22} 
+ *  \end{array}
+ *  \right)
+ *  \f]
  */
   typedef struct MAT3D {
-    double xx, xy, xz, yx, yy, yz, zx, zy, zz;
+    double xx;  /*!< Represents the element \f$a_{00}\f$ of the matrix. */
+    double xy;  /*!< Represents the element \f$a_{01}\f$ of the matrix. */
+    double xz;  /*!< Represents the element \f$a_{02}\f$ of the matrix. */
+    double yx;  /*!< Represents the element \f$a_{10}\f$ of the matrix. */
+    double yy;  /*!< Represents the element \f$a_{11}\f$ of the matrix. */
+    double yz;  /*!< Represents the element \f$a_{12}\f$ of the matrix. */
+    double zx;  /*!< Represents the element \f$a_{20}\f$ of the matrix. */
+    double zy;  /*!< Represents the element \f$a_{21}\f$ of the matrix. */
+    double zz;  /*!< Represents the element \f$a_{22}\f$ of the matrix. */
   } MAT3D;
 
 /*! \name 3D Matrix algebra functions
@@ -266,8 +324,11 @@ extern "C" {
  */
 ///@{
 /*! \function 
- *  \brief Function to populate 3D vector.
- *  \param v a pointer to the vector to be populated.
+ *  \brief Function to populate 3D matrix.
+ *
+ *  This routine populates a given 3D matrix with given values of its elements.
+ *
+ *  \param m a pointer to the 3D matrix to be populated.
  *  \param xx a double representing the element \f$a_{00}\f$ of the matrix. 
  *  \param xy a double representing the element \f$a_{01}\f$ of the matrix. 
  *  \param yz a double representing the element \f$a_{02}\f$ of the matrix. 

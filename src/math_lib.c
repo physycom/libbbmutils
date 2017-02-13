@@ -11,7 +11,7 @@
 #include <string.h>     // memset
 #include <math.h>
 
-#include "math_lib.h"
+#include "math_lib/math_lib.h"
 
 /*! \brief \f$ 180/\pi \f$, to convert from radians to degree. */
 #define RAD_TO_DEG    57.2957795131             /* 180/pi */
@@ -123,15 +123,16 @@ void set_vec3d(VEC3D * v, const double x, const double y, const double z) {
   v->z = z;
   v->mod = sqrt(x*x + y*y + z*z);
   if (v->mod < EPSILON) {
+    v->x = 0.0;
+    v->y = 0.0;
+    v->z = 0.0;
     v->mod = 0.0;
-    v->x = x;
-    v->y = y;
-    v->z = z;
   }
 }
 
 void setmod_vec3d(VEC3D * v) {
   v->mod = sqrt(v->x*v->x + v->y*v->y + v->z*v->z);
+  if (v->mod < EPSILON) v->mod = 0.0;
 }
 
 void normalize_vec3d(VEC3D * v) {
