@@ -11,7 +11,7 @@
 #include <string.h>     // memset
 #include <math.h>
 
-#include "math_lib.h"
+#include "math_lib/math_lib.h"
 
 /*! \brief \f$ 180/\pi \f$, to convert from radians to degree. */
 #define RAD_TO_DEG    57.2957795131             /* 180/pi */
