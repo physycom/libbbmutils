@@ -1,8 +1,8 @@
-/**
- * @file   math_lib.h
- * @Author A. Fabbri (alessandro.fabbri27@unibo.it), S. Sinigardi (stefano.sinigardi@unibo.it)
- * @date   February, 2016
- * @brief  This header file contains the declaration of structs and functions for the mathematical framework.
+/*!
+ * \file   math_lib.h
+ * \Author A. Fabbri (alessandro.fabbri27@unibo.it), S. Sinigardi (stefano.sinigardi@unibo.it)
+ * \date   February, 2016
+ * \brief  This header file contains the declaration of structs and functions for the mathematical framework.
  * 
  * This header file contains the declaration of the basic types of objects which implements the 2D/3D/6D vector algebra, the 2D/3D/6D matrix algebra and some utilities for the solution of a 2x2 eigenvalue problem for symmetric matrices (based on analytical solutions).
  *
