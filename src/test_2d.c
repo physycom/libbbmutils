@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "math_lib.h"
+#include "math_lib/math_lib.h"
 
 int main() {
   printf("---- TEST 2D MATH_LIB ----\n");

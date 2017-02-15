@@ -40,11 +40,13 @@ test: $(OBJ_LIB) $(TEST_EXE)
 	@$(TEST_SCRIPT)
 
 $(BIN_FOLDER)/%.exe: $(SRC_FOLDER)/%.c
-	$(CC) -I. -o $@ $(OBJ_LIB) $< -lm
+	$(CC) -I.. -o $@ $(OBJ_LIB) $< -lm
 
 $(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.c %.h
-	$(CC) -I. -c -o $@ $<
+	$(CC) -I.. -c -o $@ $<
 
 clean:
-	rm -rf $(OBJ_LIB) $(TEST_EXE) $(DOC_FOLDERS)
+	rm -f $(OBJ_LIB) $(TEST_EXE) $(DOXY_HEADER)
 
+cleanall:
+	rm -rf $(BIN_FOLDER) $(OBJ_FOLDER) $(DOC_FOLDERS)
