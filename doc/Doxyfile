@@ -5,8 +5,12 @@ USE_MDFILE_AS_MAINPAGE = README.md
 INPUT                  = src
 INPUT                  += ./
 WARN_LOGFILE           = doc/warnings.txt
-EXTRA_PACKAGES         = amsfonts
 LATEX_HEADER           = doc/doxy_header.tex
+REPEAT_BRIEF           = NO
+SHOW_INCLUDE_FILES     = NO
+USE_MATHJAX            = YES
+MATHJAX_FORMAT         = SVG # or HTML-CSS or NativeMML
+EXTRA_PACKAGES         = amsfonts
 
 # Doxyfile 1.8.13
 
@@ -21,7 +25,6 @@ CREATE_SUBDIRS         = NO
 ALLOW_UNICODE_NAMES    = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
-REPEAT_BRIEF           = YES
 ABBREVIATE_BRIEF       = "The $name class" \
                          "The $name widget" \
                          "The $name file" \
@@ -241,8 +244,6 @@ TREEVIEW_WIDTH         = 250
 EXT_LINKS_IN_WINDOW    = NO
 FORMULA_FONTSIZE       = 10
 FORMULA_TRANSPARENT    = YES
-USE_MATHJAX            = NO
-MATHJAX_FORMAT         = HTML-CSS
 MATHJAX_RELPATH        = http://cdn.mathjax.org/mathjax/latest
 MATHJAX_EXTENSIONS     =
 MATHJAX_CODEFILE       =

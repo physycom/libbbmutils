@@ -25,8 +25,8 @@ dirs:
 
 doc: dirs $(DOXY_HEADER) $(SRC_FOLDER)/* README.md $(DOXYFILE)
 	doxygen $(DOXYFILE); \
-	cd doc/latex; \
-	$(MAKE) 
+	#cd doc/latex; \
+	#$(MAKE) 
 
 $(DOXY_HEADER): 
 	[ -f $(DOXY_HEADER) ] || curl -o $(DOXY_HEADER) https://raw.githubusercontent.com/physycom/templates/master/doxy_header.tex
