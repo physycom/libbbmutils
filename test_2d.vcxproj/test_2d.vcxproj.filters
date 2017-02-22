@@ -15,15 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\math_lib.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\test_6d.c">
+    <ClCompile Include="..\src\test_2d.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\math_lib.h">
+    <ClInclude Include="..\bbmutils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

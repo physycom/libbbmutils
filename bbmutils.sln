@@ -1,15 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_3d", "vs\test_3d.vcxproj", "{7D197CC6-4900-445D-8271-EA678BEE1745}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_3d", "test_3d.vcxproj\test_3d.vcxproj", "{7D197CC6-4900-445D-8271-EA678BEE1745}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4FA1B11F-AD18-4A28-82C1-120A110B3D6A} = {4FA1B11F-AD18-4A28-82C1-120A110B3D6A}
+	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_6d", "vs\test_6d.vcxproj", "{07B341CB-DEEE-4F2F-9BB1-3D9CE46B0585}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_6d", "test_6d.vcxproj\test_6d.vcxproj", "{07B341CB-DEEE-4F2F-9BB1-3D9CE46B0585}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4FA1B11F-AD18-4A28-82C1-120A110B3D6A} = {4FA1B11F-AD18-4A28-82C1-120A110B3D6A}
+	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_2d", "vs\test_2d.vcxproj", "{5804B087-2B18-4E71-9EB6-4CEC6C80FFAA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_2d", "test_2d.vcxproj\test_2d.vcxproj", "{5804B087-2B18-4E71-9EB6-4CEC6C80FFAA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4FA1B11F-AD18-4A28-82C1-120A110B3D6A} = {4FA1B11F-AD18-4A28-82C1-120A110B3D6A}
+	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_es", "vs\test_es.vcxproj", "{BB90775B-6212-40B6-AE9D-978CB4CCC8DF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_es", "test_es.vcxproj\test_es.vcxproj", "{BB90775B-6212-40B6-AE9D-978CB4CCC8DF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4FA1B11F-AD18-4A28-82C1-120A110B3D6A} = {4FA1B11F-AD18-4A28-82C1-120A110B3D6A}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libbbmutils", "libbbmutils.vcxproj\libbbmutils.vcxproj", "{4FA1B11F-AD18-4A28-82C1-120A110B3D6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +65,14 @@ Global
 		{BB90775B-6212-40B6-AE9D-978CB4CCC8DF}.Release|x64.Build.0 = Release|x64
 		{BB90775B-6212-40B6-AE9D-978CB4CCC8DF}.Release|x86.ActiveCfg = Release|Win32
 		{BB90775B-6212-40B6-AE9D-978CB4CCC8DF}.Release|x86.Build.0 = Release|Win32
+		{4FA1B11F-AD18-4A28-82C1-120A110B3D6A}.Debug|x64.ActiveCfg = Debug|x64
+		{4FA1B11F-AD18-4A28-82C1-120A110B3D6A}.Debug|x64.Build.0 = Debug|x64
+		{4FA1B11F-AD18-4A28-82C1-120A110B3D6A}.Debug|x86.ActiveCfg = Debug|Win32
+		{4FA1B11F-AD18-4A28-82C1-120A110B3D6A}.Debug|x86.Build.0 = Debug|Win32
+		{4FA1B11F-AD18-4A28-82C1-120A110B3D6A}.Release|x64.ActiveCfg = Release|x64
+		{4FA1B11F-AD18-4A28-82C1-120A110B3D6A}.Release|x64.Build.0 = Release|x64
+		{4FA1B11F-AD18-4A28-82C1-120A110B3D6A}.Release|x86.ActiveCfg = Release|Win32
+		{4FA1B11F-AD18-4A28-82C1-120A110B3D6A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

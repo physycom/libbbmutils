@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "math_lib/math_lib.h"
+#include "libbbmutils/bbmutils.h"
 
 int main() {
   MAT2D m;
