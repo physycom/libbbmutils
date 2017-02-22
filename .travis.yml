@@ -9,4 +9,4 @@ install:
 compiler:
   - gcc
 script:
-  - make all
+  - make test
