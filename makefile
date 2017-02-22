@@ -9,7 +9,7 @@ TEST_SCRIPT = $(SRC_FOLDER)/test_all.sh
 TEST        = test_2d test_3d test_6d test_es
 TEST_EXE    = $(addprefix $(BIN_FOLDER)/,$(addsuffix .exe, $(basename $(TEST))))
 
-OBJ         = math_lib
+OBJ         = libbbmutils
 OBJ_LIB     = $(addprefix $(OBJ_FOLDER)/,$(addsuffix .o, $(basename $(OBJ))))
 
 DOXYFILE    = doc/Doxyfile
