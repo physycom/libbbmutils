@@ -1,8 +1,8 @@
 /**
- * @file   math_lib.c
- * @Author A. Fabbri (alessandro.fabbri27@unibo.it), S. Sinigardi (stefano.sinigardi@unibo.it)
- * @date   February, 2016
- * @brief  This source file contains the definitions of functions for the mathematical framework, as well as some preprocessor macros.
+ * \file   bbmutils.c
+ * \Author A. Fabbri (alessandro.fabbri27@unibo.it), S. Sinigardi (stefano.sinigardi@unibo.it)
+ * \date   February, 2016
+ * \brief  This source file contains the definitions of functions for the mathematical framework, as well as some preprocessor macros.
  *
  */
 

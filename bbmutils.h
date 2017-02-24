@@ -1,5 +1,5 @@
 /*!
- * \file   math_lib.h
+ * \file   bbmutils.h
  * \Author A. Fabbri (alessandro.fabbri27@unibo.it), S. Sinigardi (stefano.sinigardi@unibo.it)
  * \date   February, 2016
  * \brief  This header file contains the declaration of structs and functions for the mathematical framework.
@@ -19,8 +19,8 @@ extern "C" {
 #endif
 
 /*! \defgroup vec_2d 2D Vector algebra functions
- *  \brief Utilities to handle with elementary algebraic 2D operations on vectors.
- *  \details Utilities to handle with elementary algebraic 2D operations on vectors.
+ *  \brief Utilities to handle with elementary algebraic operations on 2D vectors.
+ *  \details Utilities to handle with 2D vectors and the related elementary algebraic operations.
  *
  *  @{
  */
@@ -103,9 +103,8 @@ extern "C" {
 
 
 /*! \defgroup mat_2d 2D Matrix algebra functions
- *  \brief Brief description.
- *
- *  Utilities to handle with elementary algebraic 2D operations on square matrices.
+ *  \brief Utilities to handle with elementary algebraic operations on 2D matrices.
+ *  \details Utilities to handle with 2D matrices and the related elementary algebraic operations.
  *  
  *  @{
  */
@@ -211,10 +210,9 @@ extern "C" {
 
 /*! @} */
 
-/*! \defgrup vec_3d 3D Vector algebra functions
- *  \brief Brief desciption.
- *
- *  Utilities to handle with elementary algebraic 3D operations on vectors.
+/*! \defgroup vec_3d 3D Vector algebra functions
+ *  \brief Utilities to handle with elementary algebraic operations on 3D vectors.
+ *  \details Utilities to handle with 3D vectors and the related elementary algebraic operations.
  *
  *  @{
  */
@@ -309,9 +307,8 @@ extern "C" {
 /*! @} */
 
 /*! \defgroup mat_3d 3D Matrix algebra functions
- *  \brief Brief description.
- *
- *  Utilities to handle with elementary algebraic 3D operations on square matrices.
+ *  \brief Utilities to handle with elementary algebraic operations on 3D matrices.
+ *  \details Utilities to handle with 3D matrices and the related elementary algebraic operations.
  *
  *  @{
  */
@@ -392,7 +389,7 @@ extern "C" {
   void multiply_mat3d(MAT3D * m, const double alpha);
 
 /*! \function
- *  \brief Function to generate a 2D rotation.
+ *  \brief Function to generate a 3D rotation matrix.
  *
  *  This routine populates a matrix with the values corresponding to a counter-clockwise rotation around a given 3D axis \f$\vec{u}\f$ of an angle \f$\theta\f$ whose sine and cosine values are provided, namely 
  *  \f[
@@ -412,18 +409,53 @@ extern "C" {
  */
   void make_rotation_cs(MAT3D * rot, const VEC3D * u, const double c, const double s);
 
-  void make_rotation(MAT3D * rot, const VEC3D * v, const double angle);
+/*! \function
+ *  \brief Function to generate a 3D rotation matrix.
+ *
+ *  This routine populates a matrix with the values corresponding to a counter-clockwise rotation around a given 3D axis \f$\vec{u}\f$ of a given angle \f$\theta\f$, namely 
+ *  \f[
+ *  \left( 
+ *  \begin{array}{ccc} 
+ *  \cos \theta +u_x^2 \left(1-\cos \theta\right) & u_x u_y \left(1-\cos \theta\right) - u_z \sin \theta & u_x u_z \left(1-\cos \theta\right) + u_y \sin \theta \\ 
+ *  u_y u_x \left(1-\cos \theta\right) + u_z \sin \theta & \cos \theta + u_y^2\left(1-\cos \theta\right) & u_y u_z \left(1-\cos \theta\right) - u_x \sin \theta \\ 
+ *  u_z u_x \left(1-\cos \theta\right) - u_y \sin \theta & u_z u_y \left(1-\cos \theta\right) + u_x \sin \theta & \cos \theta + u_z^2\left(1-\cos \theta\right)
+ *  \end{array} 
+ *  \right)
+ *  \f]. It is implemented as an inline function.
+ *
+ *  \param rot a pointer to the rotation matrix to be populated.
+ *  \param u a pointer to the normalized vector storing the axis information.
+ *  \param angle the rotation angle \f$\theta\f$ in radians.
+ */
+  void make_rotation(MAT3D * rot, const VEC3D * u, const double angle);
 
+/*! \function
+ *  \brief Function to rotate a 3D vector.
+ *  
+ *  This function applies a given rotation matrix to a given vector. More precisely this function implements matrix-vector multiplication but, due to naming and purpose reasons, we decided to pick this name. Thus keep in mind that this function can be used to multiply any 3D matrix with any 3D vector.
+ *
+ *  \param result a pointer to the resulting vector to be populated.
+ *  \param rot a pointer to the rotation matrix.
+ *  \param v a pointer to the original vector.
+ */
   void rotate_vec3d(VEC3D * result, const MAT3D * rot, const VEC3D * v);
 
+/*! \function
+ *  \brief Function to rotate a 3D matrix.
+ *
+ *  This function implements a matrix similarity transformation restricted to the case of orthogonal matrices, namely \f$B = R^{T} A R\f$. The purpose of this utility is to provide a handy tool to rotate rank two (contravariant) tensors, i.e. objects like \f$ v_i u_j \f$ where \f$u,v\f$ are ordinary 3D vectors.
+ *
+ *  \param result a pointer to the resulting matrix to be populated.
+ *  \param rot a pointer to the rotation matrix.
+ *  \param m a pointer to the original matrix.
+ */
   void rotate_mat3d(MAT3D * result, const MAT3D * rot, const MAT3D * m);
 
 /*! @} */
 
 /*! \defgroup vec_6d 6D Vector algebra functions
- *  \brief Brief description.
- *
- *  Utilities to handle with elementary algebraic 6D operations on vectors.
+ *  \brief Utilities to handle with elementary algebraic operations on 6D vectors.
+ *  \details Utilities to handle with 6D vectors and the related elementary algebraic operations.
  *
  *  @{ 
  */
@@ -434,14 +466,14 @@ extern "C" {
  *  This object holds the data for representing a 6D vector. More precisely, this is not an element of the vector space \f$\mathbb{R}^6\f$ rather it represent a collection of two 3D vectors and provides utilities function to manipulate them at once.
  */
   typedef struct VEC6D {
-    VEC3D a;  /*!< The first 6D vector sub-object */ 
-    VEC3D g;  /*!< The second 6D vector sub-object */ 
+    VEC3D a;  /*!< The first 3D vector sub-object */ 
+    VEC3D g;  /*!< The second 3D vector sub-object */ 
   } VEC6D;
 
 /*! \function 
  *  \brief Function to populate 6D vector.
  *
- *  Detailed description.
+ *  This function populates the six-dimensional vector with the given values for their coordinates.
  *
  *  \param v a pointer to the vector to be populated.
  *  \param ax a double representing the \f$x\f$ coordinate of first vector. 
@@ -453,14 +485,22 @@ extern "C" {
  */
   void set_vec6d(VEC6D * v, const double ax, const double ay, const double az, const double gx, const double gy, const double gz);
 
+/*! \function
+ *  \brief Function to rotate a 6D vector.
+ *
+ *  This function applies a given 3D rotation matrix to the two 3D vectors sub-objects of a given 6D vector. In this sense it does not constitute a six-dimensional rotation, it is just a handy function to act with the same ordinary rotation onto a couple of inertial data vector.
+ *
+ *  \param result a pointer to the resulting vector to be populated.
+ *  \param rot a pointer to the rotation matrix.
+ *  \param v a pointer to the original vector.
+ */
   void rotate_vec6d(VEC6D * result, const MAT3D * rot, const VEC6D * v);
 
 /*! @} */
 
-/*! \defgroup vec_6d 6D Square matrix algebra functions
- *  \brief Brief description.
- *
- *  Utilities to handle with elementary algebraic 6D operations on square matrices.
+/*! \defgroup mat_6d 6D Matrix algebra functions
+ *  \brief Utilities to handle with elementary algebraic operations on 6D matrices.
+ *  \details Utilities to handle with 6D matrices and the related elementary algebraic operations.
  *
  *  @{
  */
@@ -468,7 +508,16 @@ extern "C" {
 /*! \struct MAT6D
  *  \brief Six-dimensional square matrix object.
  *
- *  This object holds the data for representing a 6D square matrix. 
+ *  This object holds the data for representing a 6D square matrix. The precise structure of the six-dimensional matrix is 
+ *  \f[
+ *  A = \left( 
+ *  \begin{array}{cc}
+ *  A_{00} & A_{01} \\
+ *  A_{10} & A_{11}
+ *  \end{array} 
+ *  \right)
+ *  \f]
+ *  where each \f$A_{ij}\f$ is a ordinary 3D matrix (see #MAT3D).
  */
   typedef struct MAT6D {
     MAT3D A[2][2];
@@ -476,6 +525,9 @@ extern "C" {
 
 /*! \function 
  *  \brief Function to populate 6D matrix.
+ *
+ *  A function to populate a 6D matrix with the values of the four given sub-matrices of which it is composed. 
+ *
  *  \param m a pointer to the matrix to be populated.
  *  \param A00 a pointer to 3D matrix representing the \f$A_{00}\f$ sub-matrix. 
  *  \param A01 a pointer to 3D matrix representing the \f$A_{01}\f$ sub-matrix.
@@ -484,14 +536,22 @@ extern "C" {
  */
   void set_mat6d(MAT6D * m, const MAT3D * A00, const MAT3D * A01, const MAT3D * A10, const MAT3D * A11);
 
+/*! \function
+ *  \brief Function to rotate a 6D matrix.
+ *
+ *  This function implements a matrix similarity transformation restricted to the case of orthogonal matrices, namely \f$B = R^{T} A_{ij} R\f$ for each of the four 3D matrices \f$A_{ij}\f$. See #rotate_mat3d for more mathematical details.
+ *
+ *  \param result a pointer to the resulting matrix to be populated.
+ *  \param rot a pointer to the rotation matrix.
+ *  \param m a pointer to the original matrix.
+ */
   void rotate_mat6d(MAT6D * result, const MAT3D * rot, const MAT6D * m);
 
 /*! @} */
 
 /*! \defgroup es_2d 2D Eigenproblems utilities
- *  \brief Brief description.
- *
- *  Tools to set up and solve the eigenvalue problem for input 2D symmetric real-valued matrices.
+ *  \brief Two-dimensional symmetric eigenvalues problem utilities.
+ *  \details Tools to set up and solve the eigenvalue problem for input 2D symmetric real-valued matrices.
  *
  *  @{
  */
@@ -518,25 +578,27 @@ extern "C" {
  *
  *  \param a element \f$a_{01} = a_{10}\f$ of the matrix.
  *  \param b element \f$a_{11}\f$ of the matrix.
+ *  \return a populated EigenSys object.
  */
   EigenSys eigs_2x2_sym_normalized(double a, double b);
 
 /*! \function 
- *  \brief Brief description.
+ *  \brief Return the eigensystem of a 2D matrix.
  *
- *  Detailed description.
+ *  Routine that solves, by means of exact analytical formulas, the eigenvalue for a matrix of the form \f$\left( \begin{array}{cc} a & b \\ b & c\end{array} \right)\f$, for real \f$a,b,c\f$.
  *
- *  \param m blablabla.
+ *  \param m the matrix to be diagonalized.
+ *  \return a populated EigenSys object.
  */
   EigenSys eigs_2x2_sym(MAT2D m);
 
 /*! \function 
- *  \brief Return the eigensystem of a 2D matrix.
+ *  \brief Utility to numerically check the results of the diagonalization procedure.
  *
- *  Routine that solves, by means of exact analytical formulas, the eigenvalue for a matrix of the form \f$\left( \begin{array}{cc} 1 & a \\ a & b\end{array} \right)\f$, for real \f$a,b\f$.
+ *  This routines performs several numerical checks on the analytical results of the diagonalization procedure and returns an integer which encodes the outcome of the various checks.
  *
- *  \param a element \f$a_{01} = a_{10}\f$ of the matrix.
- *  \param b element \f$a_{11}\f$ of the matrix.
+ *  \param es the #EigenSys object to be checked.
+ *  \return an integer which encodes the outcome of the checks (\f$1111\f$ meaning all check are passed, \f$1101\f$ meaning the second test has failed).
  */
   int check_eigs(EigenSys es);
 
@@ -544,7 +606,7 @@ extern "C" {
 
 #ifdef ENABLE_DISPLAY_FUNCTIONS
 /*! \defgroup display Display functions
- *  \brief Brief description.
+ *  \brief Utility function with display purposes.
  *
  *  Support function to display the value of the various mathematical objects.
  *
@@ -562,66 +624,67 @@ extern "C" {
   void print_vec2d(const VEC2D * v, const char * name);
 
 /*! \function 
- *  \brief Brief.
+ *  \brief Display 2D matrix.
  *
- *  Detailed
+ *  This routine displays to stdout the elements of a given matrix along with a given name for it.
  *
- *  \param 
- *  \param name a char pointer containing the name of the .
+ *  \param m pointer to the matrix to be displayed.
+ *  \param name a char pointer containing the name of the matrix.
  */
   void print_mat2d(const MAT2D * m, const char * name);
 
 /*! \function 
- *  \brief Brief.
+ *  \brief Display 3D vector.
  *
- *  Detailed
+ *  This routine displays to stdout the elements of a given vector along with a given name for it.
  *
- *  \param 
- *  \param name a char pointer containing the name of the .
+ *  \param v pointer to the vector to be displayed.
+ *  \param name a char pointer containing the name of the vector.
  */
   void print_vec3d(const VEC3D * v, const char * name);
 
 /*! \function 
- *  \brief Brief.
+ *  \brief Display 3D matrix.
  *
- *  Detailed
+ *  This routine displays to stdout the elements of a given matrix along with a given name for it.
  *
- *  \param 
- *  \param name a char pointer containing the name of the .
+ *  \param m pointer to the matrix to be displayed.
+ *  \param name a char pointer containing the name of the matrix.
  */
   void print_mat3d(const MAT3D * m, const char * name);
 
 /*! \function 
- *  \brief Brief.
+ *  \brief Display 6D vector.
  *
- *  Detailed
+ *  This routine displays to stdout the elements of a given matrix along with a given name for it.
  *
- *  \param 
- *  \param name a char pointer containing the name of the .
+ *  \param v pointer to the matrix to be displayed.
+ *  \param name a char pointer containing the name of the vector.
  */
   void print_vec6d(const VEC6D * v, const char * name);
 
-/*! \function 
- *  \brief Brief.
+/*! \function
+ *  \brief Display 6D matrix.
  *
- *  Detailed
+ *  This routine displays to stdout the elements of a given matrix along with a given name for it.
  *
- *  \param 
- *  \param name a char pointer containing the name of the .
+ *  \param m pointer to the matrix to be displayed.
+ *  \param name a char pointer containing the name of the matrix.
  */
   void print_mat6d(const MAT6D * m, const char * name);
 
 /*! \function 
- *  \brief Brief.
+ *  \brief Display solved #EigenSys.
  *
- *  Detailed
+ *  This routine displays to stdout the contents of a given #EigenSys.
  *
- *  \param 
- *  \param name a char pointer containing the name of the .
+ *  \param m pointer to the eigenproblem to be displayed.
+ *  \param name a char pointer containing the name of the eigenproblem.
  */
-  void print_eigs(EigenSys, const char *);
+  void print_eigs(EigenSys es, const char *);
 
 /*! @} */
+
 #endif        /* ENABLE_DISPLAY_FUNCTIONS */
 
 #ifdef __cplusplus

@@ -1,5 +1,5 @@
 # Modified variables
-PROJECT_NAME           = "math_lib"
+PROJECT_NAME           = "bbmutils"
 OUTPUT_DIRECTORY       = doc
 USE_MDFILE_AS_MAINPAGE = README.md
 INPUT                  = src

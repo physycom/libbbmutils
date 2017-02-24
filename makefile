@@ -24,9 +24,9 @@ dirs:
 	@mkdir -p $(DOC_FOLDERS)
 
 doc: dirs $(DOXY_HEADER) $(SRC_FOLDER)/* README.md $(DOXYFILE)
-	doxygen $(DOXYFILE); \
-	#cd doc/latex; \
-	#$(MAKE) 
+	doxygen $(DOXYFILE) ;\
+	cd doc/latex ;\
+	$(MAKE) 
 
 $(DOXY_HEADER): dirs
 	[ -f $(DOXY_HEADER) ] || curl -o $(DOXY_HEADER) https://raw.githubusercontent.com/physycom/templates/master/doxy_header.tex
