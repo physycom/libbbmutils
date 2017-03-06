@@ -150,6 +150,7 @@ void prod_cross_3d(VEC3D * result, const VEC3D * v, const VEC3D * u) {
     result->x = v->y * u->z - v->z * u->y;
     result->y = v->z * u->x - v->x * u->z;
     result->z = v->x * u->y - v->y * u->x;
+    result->mod = sqrt(result->x * result->x + result->y * result->y + result->z * result->z);
 }
 
 void multiply_vec3d(VEC3D * v, const double alpha) {
