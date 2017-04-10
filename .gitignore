@@ -197,8 +197,6 @@ Generated_Code/
 #Exclude input/output
 *.opendb
 *.db
-*.txt
-*.json
 test/
 .DS_Store
 
