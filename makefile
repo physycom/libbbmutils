@@ -12,7 +12,7 @@ TEST_EXE    = $(addprefix $(BIN_FOLDER)/,$(addsuffix .exe, $(basename $(TEST))))
 OBJ         = libbbmutils
 OBJ_LIB     = $(addprefix $(OBJ_FOLDER)/,$(addsuffix .o, $(basename $(OBJ))))
 
-DOXYFILE    = doc/Doxyfile
+DOXYFILE    = Doxyfile
 DOXY_HEADER = doc/doxy_header.tex
 
 all: dirs $(OBJ_LIB) $(TEST_EXE)

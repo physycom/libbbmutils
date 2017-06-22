@@ -1,7 +1,6 @@
 # Modified variables
-PROJECT_NAME           = "bbmutils"
+PROJECT_NAME           = "bbmutils code documentation"
 OUTPUT_DIRECTORY       = doc
-USE_MDFILE_AS_MAINPAGE = README.md
 INPUT                  = src
 INPUT                  += ./
 WARN_LOGFILE           = doc/warnings.txt
@@ -151,7 +150,6 @@ FILE_PATTERNS          = *.c \
                          *.inc \
                          *.m \
                          *.markdown \
-                         *.md \
                          *.mm \
                          *.dox \
                          *.py \
