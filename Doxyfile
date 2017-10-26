@@ -1,5 +1,5 @@
 # Modified variables
-PROJECT_NAME           = "bbmutils code documentation"
+PROJECT_NAME           = "b.b.m. utils code documentation"
 OUTPUT_DIRECTORY       = doc
 INPUT                  = src
 INPUT                  += ./
