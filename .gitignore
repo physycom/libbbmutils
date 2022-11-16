@@ -11,7 +11,8 @@ data/
 build*/
 vcpkg_installed/
 vcpkg/
-build.log
+*.log
+*.log.old
 
 # OS Generated #
 .DS_Store*
