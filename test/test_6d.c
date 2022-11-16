@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "libbbmutils/bbmutils.h"
+#include <bbmutils.h>
 
 int main(){
   VEC6D v, vr;
@@ -30,6 +30,6 @@ int main(){
 
   rotate_mat6d(&mr, &rot, &m);
   print_mat6d(&mr, "\n6d matrix (test rotation) = R A Rt");
-  
+
   return 0;
 }

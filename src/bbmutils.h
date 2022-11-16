@@ -41,8 +41,8 @@ extern "C" {
  *  This routine sets the values of the coordinates and also evaluates the modulus, setting it to zero below a threshold of #EPSILON.
  *
  *  \param v a pointer to the vector to be populated.
- *  \param x a double representing the \f$x\f$ coordinate. 
- *  \param y a double representing the \f$y\f$ coordinate. 
+ *  \param x a double representing the \f$x\f$ coordinate.
+ *  \param y a double representing the \f$y\f$ coordinate.
  */
   void set_vec2d(VEC2D * v, const double x, const double y);
 
@@ -104,7 +104,7 @@ extern "C" {
 /*! \defgroup mat_2d 2D Matrix algebra functions
  *  \brief Utilities to handle with elementary algebraic operations on 2D matrices.
  *  \details Utilities to handle with 2D matrices and the related elementary algebraic operations.
- *  
+ *
  *  @{
  */
 
@@ -126,10 +126,10 @@ extern "C" {
  *  This routine sets the value of the matrix elements.
  *
  *  \param m a pointer to the matrix to be populated.
- *  \param xx a double representing the element \f$a_{00}\f$ of the matrix. 
- *  \param xy a double representing the element \f$a_{01}\f$ of the matrix. 
- *  \param yx a double representing the element \f$a_{10}\f$ of the matrix. 
- *  \param yy a double representing the element \f$a_{11}\f$ of the matrix. 
+ *  \param xx a double representing the element \f$a_{00}\f$ of the matrix.
+ *  \param xy a double representing the element \f$a_{01}\f$ of the matrix.
+ *  \param yx a double representing the element \f$a_{10}\f$ of the matrix.
+ *  \param yy a double representing the element \f$a_{11}\f$ of the matrix.
  */
   void set_mat2d(MAT2D * m, double xx, double xy, double yx, double yy);
 
@@ -228,15 +228,15 @@ extern "C" {
     double mod;  /*!< The 3D vector modulus \f$\sqrt{x^2 + y^2 + z^2}\f$. */
   } VEC3D;
 
-/*! \function 
+/*! \function
  *  \brief Function to populate 3D vector.
  *
  *  This routine sets the values of the coordinates and also evaluates the modulus, setting it to zero below a threshold of #EPSILON.
  *
  *  \param v a pointer to the vector to be populated.
- *  \param x a double representing the \f$x\f$ coordinate. 
- *  \param y a double representing the \f$y\f$ coordinate. 
- *  \param z a double representing the \f$z\f$ coordinate. 
+ *  \param x a double representing the \f$x\f$ coordinate.
+ *  \param y a double representing the \f$y\f$ coordinate.
+ *  \param z a double representing the \f$z\f$ coordinate.
  */
   void set_vec3d(VEC3D * v, const double x, const double y, const double z);
 
@@ -273,9 +273,9 @@ extern "C" {
 /*! \function
  *  \brief Function to evaluate the cross product.
  *
- *  This routine evaluates the cross product between two 3D vectors, by means of 
+ *  This routine evaluates the cross product between two 3D vectors, by means of
  *  \f[
- *  \vec{a} \times \vec{b} = 
+ *  \vec{a} \times \vec{b} =
  *  \left|
  *  \begin{array}{ccc}
  *  \hat{\imath} & \hat{\jmath} & \hat{k} \\
@@ -283,7 +283,7 @@ extern "C" {
  *  b_x & b_y & b_z \\
  *  \end{array}
  *  \right|
- *  = \left( a_y b_z - a_z b_y \right) \hat{\imath} + \left( a_z b_x - a_x b_z \right) \hat{\jmath} + \left( a_x b_y - a_y b_x \right) \hat{k} 
+ *  = \left( a_y b_z - a_z b_y \right) \hat{\imath} + \left( a_z b_x - a_x b_z \right) \hat{\jmath} + \left( a_x b_y - a_y b_x \right) \hat{k}
  *  \f]
  *  The positive direction of the \f$z\f$ axis is assumed to be pointing outward the screen.
  *
@@ -321,7 +321,7 @@ extern "C" {
  *  \begin{array}{ccc}
  *  a_{00} & a_{01} & a_{02} \\
  *  a_{10} & a_{11} & a_{12} \\
- *  a_{20} & a_{21} & a_{22} 
+ *  a_{20} & a_{21} & a_{22}
  *  \end{array}
  *  \right)
  *  \f]
@@ -338,21 +338,21 @@ extern "C" {
     double zz;  /*!< Represents the element \f$a_{22}\f$ of the matrix. */
   } MAT3D;
 
-/*! \function 
+/*! \function
  *  \brief Function to populate 3D matrix.
  *
  *  This routine populates a given 3D matrix with given values of its elements.
  *
  *  \param m a pointer to the 3D matrix to be populated.
- *  \param xx a double representing the element \f$a_{00}\f$ of the matrix. 
- *  \param xy a double representing the element \f$a_{01}\f$ of the matrix. 
- *  \param yz a double representing the element \f$a_{02}\f$ of the matrix. 
- *  \param yx a double representing the element \f$a_{10}\f$ of the matrix. 
- *  \param yy a double representing the element \f$a_{11}\f$ of the matrix. 
- *  \param yz a double representing the element \f$a_{12}\f$ of the matrix. 
- *  \param zx a double representing the element \f$a_{20}\f$ of the matrix. 
- *  \param zy a double representing the element \f$a_{21}\f$ of the matrix. 
- *  \param zz a double representing the element \f$a_{22}\f$ of the matrix. 
+ *  \param xx a double representing the element \f$a_{00}\f$ of the matrix.
+ *  \param xy a double representing the element \f$a_{01}\f$ of the matrix.
+ *  \param yz a double representing the element \f$a_{02}\f$ of the matrix.
+ *  \param yx a double representing the element \f$a_{10}\f$ of the matrix.
+ *  \param yy a double representing the element \f$a_{11}\f$ of the matrix.
+ *  \param yz a double representing the element \f$a_{12}\f$ of the matrix.
+ *  \param zx a double representing the element \f$a_{20}\f$ of the matrix.
+ *  \param zy a double representing the element \f$a_{21}\f$ of the matrix.
+ *  \param zz a double representing the element \f$a_{22}\f$ of the matrix.
  */
   void set_mat3d(MAT3D * m, const double xx, const double xy, const double xz, const double yx, const double yy, const double yz, const double zx, const double zy, const double zz);
 
@@ -390,14 +390,14 @@ extern "C" {
 /*! \function
  *  \brief Function to generate a 3D rotation matrix.
  *
- *  This routine populates a matrix with the values corresponding to a counter-clockwise rotation around a given 3D axis \f$\vec{u}\f$ of an angle \f$\theta\f$ whose sine and cosine values are provided, namely 
+ *  This routine populates a matrix with the values corresponding to a counter-clockwise rotation around a given 3D axis \f$\vec{u}\f$ of an angle \f$\theta\f$ whose sine and cosine values are provided, namely
  *  \f[
- *  \left( 
- *  \begin{array}{ccc} 
- *  \cos \theta +u_x^2 \left(1-\cos \theta\right) & u_x u_y \left(1-\cos \theta\right) - u_z \sin \theta & u_x u_z \left(1-\cos \theta\right) + u_y \sin \theta \\ 
- *  u_y u_x \left(1-\cos \theta\right) + u_z \sin \theta & \cos \theta + u_y^2\left(1-\cos \theta\right) & u_y u_z \left(1-\cos \theta\right) - u_x \sin \theta \\ 
+ *  \left(
+ *  \begin{array}{ccc}
+ *  \cos \theta +u_x^2 \left(1-\cos \theta\right) & u_x u_y \left(1-\cos \theta\right) - u_z \sin \theta & u_x u_z \left(1-\cos \theta\right) + u_y \sin \theta \\
+ *  u_y u_x \left(1-\cos \theta\right) + u_z \sin \theta & \cos \theta + u_y^2\left(1-\cos \theta\right) & u_y u_z \left(1-\cos \theta\right) - u_x \sin \theta \\
  *  u_z u_x \left(1-\cos \theta\right) - u_y \sin \theta & u_z u_y \left(1-\cos \theta\right) + u_x \sin \theta & \cos \theta + u_z^2\left(1-\cos \theta\right)
- *  \end{array} 
+ *  \end{array}
  *  \right)
  *  \f]. It is implemented as an inline function.
  *
@@ -411,14 +411,14 @@ extern "C" {
 /*! \function
  *  \brief Function to generate a 3D rotation matrix.
  *
- *  This routine populates a matrix with the values corresponding to a counter-clockwise rotation around a given 3D axis \f$\vec{u}\f$ of a given angle \f$\theta\f$, namely 
+ *  This routine populates a matrix with the values corresponding to a counter-clockwise rotation around a given 3D axis \f$\vec{u}\f$ of a given angle \f$\theta\f$, namely
  *  \f[
- *  \left( 
- *  \begin{array}{ccc} 
- *  \cos \theta +u_x^2 \left(1-\cos \theta\right) & u_x u_y \left(1-\cos \theta\right) - u_z \sin \theta & u_x u_z \left(1-\cos \theta\right) + u_y \sin \theta \\ 
- *  u_y u_x \left(1-\cos \theta\right) + u_z \sin \theta & \cos \theta + u_y^2\left(1-\cos \theta\right) & u_y u_z \left(1-\cos \theta\right) - u_x \sin \theta \\ 
+ *  \left(
+ *  \begin{array}{ccc}
+ *  \cos \theta +u_x^2 \left(1-\cos \theta\right) & u_x u_y \left(1-\cos \theta\right) - u_z \sin \theta & u_x u_z \left(1-\cos \theta\right) + u_y \sin \theta \\
+ *  u_y u_x \left(1-\cos \theta\right) + u_z \sin \theta & \cos \theta + u_y^2\left(1-\cos \theta\right) & u_y u_z \left(1-\cos \theta\right) - u_x \sin \theta \\
  *  u_z u_x \left(1-\cos \theta\right) - u_y \sin \theta & u_z u_y \left(1-\cos \theta\right) + u_x \sin \theta & \cos \theta + u_z^2\left(1-\cos \theta\right)
- *  \end{array} 
+ *  \end{array}
  *  \right)
  *  \f]. It is implemented as an inline function.
  *
@@ -430,7 +430,7 @@ extern "C" {
 
 /*! \function
  *  \brief Function to rotate a 3D vector.
- *  
+ *
  *  This function applies a given rotation matrix to a given vector. More precisely this function implements matrix-vector multiplication but, due to naming and purpose reasons, we decided to pick this name. Thus keep in mind that this function can be used to multiply any 3D matrix with any 3D vector.
  *
  *  \param result a pointer to the resulting vector to be populated.
@@ -456,7 +456,7 @@ extern "C" {
  *  \brief Utilities to handle with elementary algebraic operations on 6D vectors.
  *  \details Utilities to handle with 6D vectors and the related elementary algebraic operations.
  *
- *  @{ 
+ *  @{
  */
 
 /*! \struct VEC6D
@@ -465,22 +465,22 @@ extern "C" {
  *  This object holds the data for representing a 6D vector. More precisely, this is not an element of the vector space \f$\mathbb{R}^6\f$ rather it represent a collection of two 3D vectors and provides utilities function to manipulate them at once.
  */
   typedef struct VEC6D {
-    VEC3D a;  /*!< The first 3D vector sub-object */ 
-    VEC3D g;  /*!< The second 3D vector sub-object */ 
+    VEC3D a;  /*!< The first 3D vector sub-object */
+    VEC3D g;  /*!< The second 3D vector sub-object */
   } VEC6D;
 
-/*! \function 
+/*! \function
  *  \brief Function to populate 6D vector.
  *
  *  This function populates the six-dimensional vector with the given values for their coordinates.
  *
  *  \param v a pointer to the vector to be populated.
- *  \param ax a double representing the \f$x\f$ coordinate of first vector. 
- *  \param ay a double representing the \f$y\f$ coordinate of first vector. 
- *  \param az a double representing the \f$z\f$ coordinate of first vector. 
- *  \param gx a double representing the \f$x\f$ coordinate of second vector. 
- *  \param gy a double representing the \f$y\f$ coordinate of second vector. 
- *  \param gz a double representing the \f$z\f$ coordinate of second vector. 
+ *  \param ax a double representing the \f$x\f$ coordinate of first vector.
+ *  \param ay a double representing the \f$y\f$ coordinate of first vector.
+ *  \param az a double representing the \f$z\f$ coordinate of first vector.
+ *  \param gx a double representing the \f$x\f$ coordinate of second vector.
+ *  \param gy a double representing the \f$y\f$ coordinate of second vector.
+ *  \param gz a double representing the \f$z\f$ coordinate of second vector.
  */
   void set_vec6d(VEC6D * v, const double ax, const double ay, const double az, const double gx, const double gy, const double gz);
 
@@ -507,13 +507,13 @@ extern "C" {
 /*! \struct MAT6D
  *  \brief Six-dimensional square matrix object.
  *
- *  This object holds the data for representing a 6D square matrix. The precise structure of the six-dimensional matrix is 
+ *  This object holds the data for representing a 6D square matrix. The precise structure of the six-dimensional matrix is
  *  \f[
- *  A = \left( 
+ *  A = \left(
  *  \begin{array}{cc}
  *  A_{00} & A_{01} \\
  *  A_{10} & A_{11}
- *  \end{array} 
+ *  \end{array}
  *  \right)
  *  \f]
  *  where each \f$A_{ij}\f$ is a ordinary 3D matrix (see #MAT3D).
@@ -522,13 +522,13 @@ extern "C" {
     MAT3D A[2][2];
   } MAT6D;
 
-/*! \function 
+/*! \function
  *  \brief Function to populate 6D matrix.
  *
- *  A function to populate a 6D matrix with the values of the four given sub-matrices of which it is composed. 
+ *  A function to populate a 6D matrix with the values of the four given sub-matrices of which it is composed.
  *
  *  \param m a pointer to the matrix to be populated.
- *  \param A00 a pointer to 3D matrix representing the \f$A_{00}\f$ sub-matrix. 
+ *  \param A00 a pointer to 3D matrix representing the \f$A_{00}\f$ sub-matrix.
  *  \param A01 a pointer to 3D matrix representing the \f$A_{01}\f$ sub-matrix.
  *  \param A10 a pointer to 3D matrix representing the \f$A_{10}\f$ sub-matrix.
  *  \param A11 a pointer to 3D matrix representing the \f$A_{11}\f$ sub-matrix.
@@ -558,19 +558,19 @@ extern "C" {
 /*! \struct EigenSys
  *  \brief Object containing the data for a 2D eigenvalue problem.
  *
- *  This object holds the data related to a two-dimensional real-valued eigenvalue problem for symmetric matrices. 
+ *  This object holds the data related to a two-dimensional real-valued eigenvalue problem for symmetric matrices.
  */
   typedef struct EigenSys {
-    MAT2D A;    /*!< The 2D symmetric matrix to be diagonalized. */  
-    double l1;  /*!< Largest eigenvalue. */ 
-    double l2;  /*!< Smallest eigenvalue. */ 
+    MAT2D A;    /*!< The 2D symmetric matrix to be diagonalized. */
+    double l1;  /*!< Largest eigenvalue. */
+    double l2;  /*!< Smallest eigenvalue. */
     VEC2D v1;   /*!< Eigenvector corresponding to the largest eigenvalue. */
     VEC2D v2;   /*!< Eigenvector corresponding to the smallest eigenvalue. */
     VEC2D u1;   /*!< Normalized eigenvector corresponding to the largest eigenvalue. */
     VEC2D u2;   /*!< Normalized eigenvector corresponding to the smallest eigenvalue. */
   } EigenSys;
 
-/*! \function 
+/*! \function
  *  \brief Return the eigensystem of a 2D matrix.
  *
  *  Routine that solves, by means of exact analytical formulas, the eigenvalue for a matrix of the form \f$\left( \begin{array}{cc} 1 & a \\ a & b\end{array} \right)\f$, for real \f$a,b\f$.
@@ -581,7 +581,7 @@ extern "C" {
  */
   EigenSys eigs_2x2_sym_normalized(double a, double b);
 
-/*! \function 
+/*! \function
  *  \brief Return the eigensystem of a 2D matrix.
  *
  *  Routine that solves, by means of exact analytical formulas, the eigenvalue for a matrix of the form \f$\left( \begin{array}{cc} a & b \\ b & c\end{array} \right)\f$, for real \f$a,b,c\f$.
@@ -591,7 +591,7 @@ extern "C" {
  */
   EigenSys eigs_2x2_sym(MAT2D m);
 
-/*! \function 
+/*! \function
  *  \brief Utility to numerically check the results of the diagonalization procedure.
  *
  *  This routines performs several numerical checks on the analytical results of the diagonalization procedure and returns an integer which encodes the outcome of the various checks.
@@ -612,7 +612,7 @@ extern "C" {
  *  @{
  */
 
-/*! \function 
+/*! \function
  *  \brief Display 2D vector.
  *
  *  This routine displays to stdout the coordinates of a given vector along with a given name for it.
@@ -622,7 +622,7 @@ extern "C" {
  */
   void print_vec2d(const VEC2D * v, const char * name);
 
-/*! \function 
+/*! \function
  *  \brief Display 2D matrix.
  *
  *  This routine displays to stdout the elements of a given matrix along with a given name for it.
@@ -632,7 +632,7 @@ extern "C" {
  */
   void print_mat2d(const MAT2D * m, const char * name);
 
-/*! \function 
+/*! \function
  *  \brief Display 3D vector.
  *
  *  This routine displays to stdout the elements of a given vector along with a given name for it.
@@ -642,7 +642,7 @@ extern "C" {
  */
   void print_vec3d(const VEC3D * v, const char * name);
 
-/*! \function 
+/*! \function
  *  \brief Display 3D matrix.
  *
  *  This routine displays to stdout the elements of a given matrix along with a given name for it.
@@ -652,7 +652,7 @@ extern "C" {
  */
   void print_mat3d(const MAT3D * m, const char * name);
 
-/*! \function 
+/*! \function
  *  \brief Display 6D vector.
  *
  *  This routine displays to stdout the elements of a given matrix along with a given name for it.
@@ -672,7 +672,7 @@ extern "C" {
  */
   void print_mat6d(const MAT6D * m, const char * name);
 
-/*! \function 
+/*! \function
  *  \brief Display solved #EigenSys.
  *
  *  This routine displays to stdout the contents of a given #EigenSys.

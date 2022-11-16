@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "libbbmutils/bbmutils.h"
+#include <bbmutils.h>
 
 int main() {
   VEC3D v, u, vr, ur, axis;
@@ -13,8 +13,8 @@ int main() {
   set_vec3d(&v, 1.0, 1.0, 0.0);
   print_vec3d(&v, "\n3d vector = v");
 
-  set_mat3d(&m, 1.0, 0.0, -1.0, 
-                0.0, 2.0,  0.0, 
+  set_mat3d(&m, 1.0, 0.0, -1.0,
+                0.0, 2.0,  0.0,
                 0.0, 0.0,  3.0);
   print_mat3d(&m, "\n3d matrix = A");
 

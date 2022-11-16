@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "libbbmutils/bbmutils.h"
+#include <bbmutils.h>
 
 int main() {
   MAT2D m;

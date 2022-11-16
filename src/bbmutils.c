@@ -1,7 +1,7 @@
 /**
- * \file   bbmutils.c
- * \Author A. Fabbri (alessandro.fabbri27@unibo.it), S. Sinigardi (stefano.sinigardi@unibo.it)
- * \date   February, 2016
+ * \file    bbmutils.c
+ * \Author  A. Fabbri (alessandro.fabbri27@unibo.it), S. Sinigardi (stefano.sinigardi@unibo.it)
+ * \date    February, 2016
  * \brief   This file contains the definitions of structs and functions for the mathematical framework, as well as various useful preprocessor macro.
  * \details This file contains the definitions of the basic types of objects which implements the 2D/3D/6D vector algebra, the 2D/3D/6D matrix algebra and some utilities for the solution of a 2x2 eigenvalue problem for symmetric matrices (based on analytical solutions).
  */
@@ -11,7 +11,7 @@
 #include <string.h>     // memset
 #include <math.h>
 
-#include "libbbmutils/bbmutils.h"
+#include "bbmutils.h"
 
 /*! \brief \f$ 180/\pi \f$, to convert from radians to degree. */
 #define RAD_TO_DEG    57.2957795131             /* 180/pi */
@@ -323,7 +323,7 @@ int check_eigs(EigenSys es) {
   // check eigenvalues
   VEC2D lhs, rhs;
   rotate_vec2d(&lhs, &(es.A), &(es.u1));
-  rhs = es.u1; 
+  rhs = es.u1;
   multiply_vec2d(&rhs, es.l1);
   if (fabs(lhs.x - rhs.x) < EPSILON) check += 1;
   if (fabs(lhs.y - rhs.y) < EPSILON) check += 10;
