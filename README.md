@@ -22,7 +22,11 @@ A C89 library designed to handle problems with vectors algebra, matrix algebra a
 - 2D eigenvalue problems for symmetric matrices where exact diagonalization is possible.
 
 The whole library is designed by making use of pointers in order to minimize the duplication of data with the aim of being employed in embedded systems.
-The library is also C++ compatible and comes equipped with a very basic test unit, try `make test`.
+The library is also C++ compatible and comes equipped with a very basic test unit. After building executables, run them with
+
+```pwsh
+./ci/verify-test-log.ps1 -TestBinFolder ./bin/ -TestLogFolder ./test/
+```
 
 ## Installation
 
