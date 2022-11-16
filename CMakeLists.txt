@@ -84,3 +84,56 @@ install(EXPORT BBMUtilsTargets
   NAMESPACE BBMUtils::
   DESTINATION "${INSTALL_CMAKE_DIR}"
 )
+
+find_package(Doxygen)
+option(BUILD_DOCUMENTATION "Create documentation (requires Doxygen)" ${DOXYGEN_FOUND})
+
+if(BUILD_DOCUMENTATION)
+  if(NOT DOXYGEN_FOUND)
+    message(FATAL_ERROR "Doxygen is needed to build the documentation.")
+  endif()
+
+  set(DOXYGEN_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/doc")
+  set(DOXYGEN_GENERATE_LATEX "YES")
+  set(DOXYGEN_WARN_LOGFILE "${CMAKE_CURRENT_LIST_DIR}/doc/warnings.txt")
+  set(DOXYGEN_LATEX_HEADER "${CMAKE_CURRENT_LIST_DIR}/doc/doxy_header.tex")
+  set(DOXYGEN_LATEX_HEADER_URL "https://raw.githubusercontent.com/physycom/templates/master/texmf/tex/generic/doxy_header.tex")
+  if(NOT EXISTS ${DOXYGEN_LATEX_HEADER})
+    message(STATUS "Retrieving Doxygen header")
+    file(DOWNLOAD ${DOXYGEN_LATEX_HEADER_URL} ${DOXYGEN_LATEX_HEADER} SHOW_PROGRESS)
+  endif()
+  set(DOXYGEN_REPEAT_BRIEF "NO")
+  set(DOXYGEN_SHOW_INCLUDE_FILES "NO")
+  set(DOXYGEN_USE_MATHJAX "YES")
+  set(DOXYGEN_MATHJAX_FORMAT "SVG") # or HTML-CSS or NativeMML
+  set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "README.md")
+
+  file(GLOB md_sources "${CMAKE_CURRENT_LIST_DIR}/*.md")
+  file(GLOB c_sources  "${CMAKE_CURRENT_LIST_DIR}/src/*.c")
+  file(GLOB h_sources  "${CMAKE_CURRENT_LIST_DIR}/src/*.h")
+
+  doxygen_add_docs(doxy
+    ${md_sources} ${c_sources} ${h_sources}
+    ALL
+    COMMENT "Generating documentation with Doxygen"
+  )
+
+  if(WIN32)
+    set (MAKE_PROGRAM ${CMAKE_CURRENT_LIST_DIR}/doc/latex/make.bat)
+  else()
+    find_program (MAKE_PROGRAM NAMES make)
+  endif()
+  find_program (LATEX_PROGRAM NAMES latex)
+
+  if(MAKE_PROGRAM AND LATEX_PROGRAM)
+    message(STATUS "Make and LaTeX have been found, you can build LaTeX documentation by running CMake with target latex!")
+    add_custom_target(latex ALL
+                      COMMAND ${MAKE_PROGRAM}
+                      WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/doc/latex
+                      COMMENT "Generating latex documentation"
+                      VERBATIM)
+    add_dependencies(latex doxy)
+  else()
+    message(STATUS "Make or LaTeX have not been found, you have to build the LaTeX documentation by yourself using the Doxygen-generated Makefile")
+  endif()
+endif()
